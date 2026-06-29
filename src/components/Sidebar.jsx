@@ -112,13 +112,20 @@ export default function Sidebar({
 
             {resourcesExpanded &&
               module.resources.map((resource, idx) => (
-                <div key={idx} className="resource-card">
+                <a
+                  key={idx}
+                  href={resource.url || "#"}
+                  target={resource.url && resource.url !== "#" ? "_blank" : undefined}
+                  rel={resource.url && resource.url !== "#" ? "noopener noreferrer" : undefined}
+                  className="resource-card"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
                   <div className="resource-icon">📄</div>
                   <div className="resource-info">
                     <h4>{resource.title}</h4>
                     <span className="resource-type">{resource.type}</span>
                   </div>
-                </div>
+                </a>
               ))}
           </div>
 
