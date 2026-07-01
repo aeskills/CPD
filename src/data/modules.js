@@ -673,6 +673,22 @@ export const modules = [
     videos: [],
     resourceSections: [
       {
+        title: "Remixable Templates",
+        icon: "📓",
+        resources: [
+          {
+            title: "My Calm down Toolkit (5 Pages)",
+            type: "Template",
+            url: "https://new.express.adobe.com/publishedV2/urn:aaid:sc:AP:0c15af09-beb4-5f3c-ae5c-c3cff4140ad6?promoid=Y69SGM5H&sdid=C4SZ2FYJ&mv=other",
+          },
+          {
+            title: "Self-Reflection Card — My Strength SEL",
+            type: "Template",
+            url: "https://new.express.adobe.com/publishedV2/urn:aaid:sc:AP:990e6291-fc00-52c1-965f-d8ccd4dc431c?promoid=Y69SGM5H&sdid=C4SZ2FYJ&mv=other",
+          },
+        ],
+      },
+      {
         title: "Comic Strip Templates",
         icon: "💬",
         resources: [
@@ -682,9 +698,19 @@ export const modules = [
             url: "https://new.express.adobe.com/publishedV2/urn:aaid:sc:AP:61dc92e9-51d8-5939-802e-e23408d9e133?bloomOrigin=comicstrip",
           },
           {
-            title: "Science SEL — Responsible Decision Making & Collaboration",
+            title: "Science SEL — Responsible Decision Making & Collaboration (Template 1)",
             type: "Comic Strip",
             url: "https://new.express.adobe.com/publishedV2/urn:aaid:sc:AP:4d6b39cc-f800-5eac-bd10-725b49a2c0f4?bloomOrigin=comicstrip",
+          },
+          {
+            title: "Science SEL — Responsible Decision Making & Collaboration (Template 2)",
+            type: "Comic Strip",
+            url: "https://new.express.adobe.com/publishedV2/urn:aaid:sc:AP:279ae3b5-7d05-5be5-b46b-a477bcd15dd2?bloomOrigin=comicstrip",
+          },
+          {
+            title: "Computer Science SEL — Responsible Decision Making & Ethical Tech Use",
+            type: "Comic Strip",
+            url: "https://new.express.adobe.com/publishedV2/urn:aaid:sc:AP:2d872141-98f3-53d2-9f78-c518be45debc?bloomOrigin=comicstrip",
           },
         ],
       },
