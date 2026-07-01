@@ -27,6 +27,8 @@ function saveProgress(progress) {
   }
 }
 
+import { modules } from "../data/modules";
+
 export function useProgress() {
   const [progress, setProgress] = useState(loadProgress);
 
@@ -38,12 +40,39 @@ export function useProgress() {
     setProgress((prev) => {
       const current = prev.videoProgress[videoId] || 0;
       if (percentage <= current) return prev;
+
+      const newVideoProgress = {
+        ...prev.videoProgress,
+        [videoId]: Math.min(100, Math.round(percentage)),
+      };
+
+      // Automatically mark module as complete if all playable videos are done
+      let newCompletedModules = [...prev.completedModules];
+      const targetModule = modules.find((m) => m.videos.some((v) => v.id === videoId));
+      if (targetModule) {
+        const playableVideos = targetModule.videos.filter((v) => !v.comingSoon);
+        const allDone = playableVideos.every(
+          (v) => (newVideoProgress[v.id] || 0) >= 95
+        );
+        if (allDone && !newCompletedModules.includes(targetModule.id)) {
+          newCompletedModules.push(targetModule.id);
+        }
+      }
+
       return {
         ...prev,
-        videoProgress: {
-          ...prev.videoProgress,
-          [videoId]: Math.min(100, Math.round(percentage)),
-        },
+        videoProgress: newVideoProgress,
+        completedModules: newCompletedModules,
+      };
+    });
+  }, []);
+
+  const completeNoVideoModule = useCallback((moduleId) => {
+    setProgress((prev) => {
+      if (prev.completedModules.includes(moduleId)) return prev;
+      return {
+        ...prev,
+        completedModules: [...prev.completedModules, moduleId],
       };
     });
   }, []);
@@ -78,49 +107,22 @@ export function useProgress() {
 
   const getModuleCompletion = useCallback(
     (mod) => {
-      const videoWeight = 0.7;
-      const quizWeight = 0.3;
-      const videoProgress = getModuleVideoProgress(mod.videos);
-      const quizScore = progress.quizPassed[mod.id] ? 100 : 0;
-      return Math.round(videoProgress * videoWeight + quizScore * quizWeight);
+      const playableVideos = mod.videos.filter((v) => !v.comingSoon);
+      const hasVideos = playableVideos.length > 0;
+
+      if (!hasVideos) {
+        return progress.completedModules.includes(mod.id) ? 100 : 0;
+      }
+
+      return getModuleVideoProgress(playableVideos);
     },
-    [getModuleVideoProgress, progress.quizPassed]
+    [getModuleVideoProgress, progress.completedModules]
   );
 
   const submitQuiz = useCallback(
     (moduleId, score, total) => {
-      const passed = score / total >= 0.7;
-      setProgress((prev) => {
-        const newState = {
-          ...prev,
-          quizScores: { ...prev.quizScores, [moduleId]: score },
-          quizPassed: { ...prev.quizPassed, [moduleId]: passed },
-        };
-
-        // Unlock next module if passed
-        if (passed) {
-          const nextModuleId = moduleId + 1;
-          if (
-            nextModuleId <= 4 &&
-            !newState.modulesUnlocked.includes(nextModuleId)
-          ) {
-            newState.modulesUnlocked = [
-              ...newState.modulesUnlocked,
-              nextModuleId,
-            ];
-          }
-          // Mark current module as complete
-          if (!newState.completedModules.includes(moduleId)) {
-            newState.completedModules = [
-              ...newState.completedModules,
-              moduleId,
-            ];
-          }
-        }
-
-        return newState;
-      });
-      return passed;
+      // Quiz is now disabled / coming soon. Keep as no-op.
+      return false;
     },
     []
   );
@@ -165,6 +167,7 @@ export function useProgress() {
   return {
     progress,
     updateVideoProgress,
+    completeNoVideoModule,
     isVideoComplete,
     areAllVideosComplete,
     getModuleVideoProgress,

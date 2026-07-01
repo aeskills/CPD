@@ -15,6 +15,7 @@ export default function App() {
   const {
     progress,
     updateVideoProgress,
+    completeNoVideoModule,
     isVideoComplete,
     areAllVideosComplete,
     getModuleVideoProgress,
@@ -75,20 +76,11 @@ export default function App() {
                 moduleId={pageData.moduleId || 1}
                 onNavigate={navigate}
                 updateVideoProgress={updateVideoProgress}
+                completeNoVideoModule={completeNoVideoModule}
                 isVideoComplete={isVideoComplete}
                 areAllVideosComplete={areAllVideosComplete}
-                submitQuiz={(moduleId, score, total) => {
-                  const passed = submitQuiz(moduleId, score, total);
-                  if (passed && isAllComplete()) {
-                    setTimeout(() => {
-                      addToast(
-                        "🎓 All CPD sessions complete! Your certificate is ready!",
-                        "success"
-                      );
-                    }, 1500);
-                  }
-                  return passed;
-                }}
+                isAllComplete={isAllComplete}
+                submitQuiz={submitQuiz}
                 progress={progress}
                 addToast={addToast}
               />

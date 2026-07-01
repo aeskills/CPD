@@ -58,10 +58,9 @@ export default function LandingPage({ onNavigate }) {
       <section className="hero">
         <div className="hero-badge">
           <span>✦</span>
-          <span>CPD Foundation Program 2024</span>
+          <span>Continuous Professional Development (CPD)</span>
         </div>
-        <h1 className="hero-title">{courseInfo.title}</h1>
-        <p className="hero-subtitle">{courseInfo.subtitle}</p>
+        <h1 className="hero-title" style={{ maxWidth: "800px", margin: "0 auto var(--space-6)" }}>{courseInfo.subtitle}</h1>
         <button
           className="btn btn-gold btn-lg btn-glow"
           onClick={handleCTA}
@@ -78,13 +77,6 @@ export default function LandingPage({ onNavigate }) {
             <span>◆</span>
             Designed by {courseInfo.organization}
           </span>
-        </div>
-
-        <h2 className="course-title">{courseInfo.title}</h2>
-
-        <div className="lang-pill">
-          <span>🌐</span>
-          Lectures available in {courseInfo.languages.length} Languages
         </div>
 
         {/* Faculty List */}

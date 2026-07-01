@@ -32,7 +32,7 @@ export default function CertificatePage({ userName, setUserName, onNavigate }) {
 
       <div className="modules-header">
         <h1>🎉 Congratulations!</h1>
-        <p>You've completed all 4 CPD Foundation sessions</p>
+        <p>You've completed all CPD Series 1 & Series 2 Sessions</p>
       </div>
 
       {!showCert ? (
@@ -105,7 +105,7 @@ export default function CertificatePage({ userName, setUserName, onNavigate }) {
               </div>
               <div className="cert-detail">
                 <div className="cert-detail-label">Sessions</div>
-                <div className="cert-detail-value">4 of 4 Completed</div>
+                <div className="cert-detail-value">2 Series (4 Sessions) Completed</div>
               </div>
             </div>
 

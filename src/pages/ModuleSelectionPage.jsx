@@ -10,6 +10,23 @@ export default function ModuleSelectionPage({
 }) {
   const [selectedModule, setSelectedModule] = useState(modules[0]);
 
+  const seriesGroups = [
+    {
+      title: "CPD Series 1",
+      sessions: [
+        { ...modules[0], displayName: "Session 1" },
+        { ...modules[2], displayName: "Session 2" },
+      ],
+    },
+    {
+      title: "CPD Series 2",
+      sessions: [
+        { ...modules[1], displayName: "Session 1" },
+        { ...modules[3], displayName: "Session 2" },
+      ],
+    },
+  ];
+
   const handleModuleClick = (mod) => {
     setSelectedModule(mod);
   };
@@ -20,52 +37,67 @@ export default function ModuleSelectionPage({
 
   return (
     <div className="modules-page animate-fade-in">
-      <div className="modules-header">
+      <div className="top-bar-nav" style={{ marginBottom: "var(--space-4)", display: "flex", justifyContent: "flex-start" }}>
+        <button
+          className="btn btn-ghost btn-sm back-to-home-top"
+          onClick={() => onNavigate("landing")}
+        >
+          ← Back to Home
+        </button>
+      </div>
+
+      <div className="modules-header" style={{ marginTop: "0" }}>
         <h1>Course Dashboard</h1>
-        <p>Select a CPD session to begin your learning journey</p>
+        <p>Select a CPD Session to begin your learning journey</p>
       </div>
 
       <div className="modules-grid">
         {/* Left Panel — Module List */}
         <div className="module-list stagger">
-          {modules.map((mod) => {
-            const unlocked = isModuleUnlocked(mod.id);
-            const complete = isModuleComplete(mod.id);
-            const active = selectedModule.id === mod.id;
-            const completion = getModuleCompletion(mod);
+          {seriesGroups.map((group) => (
+            <div key={group.title} className="session-group">
+              <h4 className="session-group-title">{group.title}</h4>
+              <div className="session-series-list">
+                {group.sessions.map((mod) => {
+                  const unlocked = isModuleUnlocked(mod.id);
+                  const complete = isModuleComplete(mod.id);
+                  const active = selectedModule.id === mod.id;
+                  const completion = getModuleCompletion(mod);
 
-            return (
-              <div
-                key={mod.id}
-                className={`module-item ${active ? "module-active" : ""} ${complete ? "module-complete" : ""}`}
-                onClick={() => handleModuleClick(mod)}
-                style={{ opacity: 0, animation: `fadeInUp 400ms ease ${mod.id * 80}ms forwards` }}
-              >
-                <div className="module-number">
-                  {complete ? "✓" : mod.id}
-                </div>
-                <div className="module-info">
-                  <h3>CPD {mod.id}</h3>
-                  <span className="module-status">
-                    {complete
-                      ? "Completed"
-                      : completion > 0
-                        ? `${completion}% complete`
-                        : "Not started"}
-                  </span>
-                  {!complete && (
-                    <div className="module-progress-bar">
-                      <div
-                        className="module-progress-fill"
-                        style={{ width: `${completion}%` }}
-                      />
+                  return (
+                    <div
+                      key={mod.id}
+                      className={`module-item ${active ? "module-active" : ""} ${complete ? "module-complete" : ""}`}
+                      onClick={() => handleModuleClick(mod)}
+                      style={{ opacity: 0, animation: `fadeInUp 400ms ease ${mod.id * 80}ms forwards` }}
+                    >
+                      <div className="module-number">
+                        {complete ? "✓" : mod.displayName === "Session 1" ? "S1" : "S2"}
+                      </div>
+                      <div className="module-info">
+                        <h3>{mod.displayName}</h3>
+                        <span className="module-status">
+                          {complete
+                            ? "Completed"
+                            : completion > 0
+                              ? `${completion}% complete`
+                              : "Not started"}
+                        </span>
+                        {!complete && (
+                          <div className="module-progress-bar">
+                            <div
+                              className="module-progress-fill"
+                              style={{ width: `${completion}%` }}
+                            />
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  )}
-                </div>
-
+                  );
+                })}
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
 
         {/* Center Panel — Topic Details */}
@@ -106,20 +138,21 @@ export default function ModuleSelectionPage({
               <span className="pill-dot" style={{ background: "var(--success)" }} />
               {selectedModule.quizCount} Quizzes
             </span>
+            {selectedModule.resourceSections && selectedModule.resourceSections.length > 0 && (
+              <span className="content-pill">
+                <span className="pill-dot" style={{ background: "#a78bfa" }} />
+                {selectedModule.resourceSections.reduce((sum, s) => sum + s.resources.length, 0)} Templates
+              </span>
+            )}
           </div>
 
           <div className="module-actions">
             <button
-              className="btn btn-primary btn-lg"
+              className="btn btn-primary btn-lg w-full"
               onClick={handleEnterSession}
+              style={{ width: "100%" }}
             >
-              Enter Session →
-            </button>
-            <button
-              className="btn btn-ghost"
-              onClick={() => onNavigate("landing")}
-            >
-              ← Back to Home
+              Start Session →
             </button>
           </div>
         </div>
