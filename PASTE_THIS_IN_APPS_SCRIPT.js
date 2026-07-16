@@ -1,20 +1,40 @@
 /**
- * Google Apps Script for CPD Sessions Webapp Integration (Passwordless 23-Column Version)
+ * Google Apps Script for CPD Sessions Webapp Integration
+ * (Customized 23-Column Version with Passwordless OTP authentication)
  * 
  * Instructions:
  * 1. Open your Google Sheet.
  * 2. Click Extensions > Apps Script.
  * 3. Clear any default code and paste this script in.
- * 4. Ensure you have the updated header row (Columns A to W).
+ * 4. Ensure you have the updated header row (Columns A to W):
  *    A: Timestamp
  *    B: First Name
  *    C: Last Name
  *    D: Email
  *    E: School Name
- *    F: S1 S1 (Teacher Submit)
- *    G: S1 S1 (Student Submit)
- *    ... and so on until W: S2 S4 (Student Submit)
- * 5. Click Deploy > Manage deployments, edit the deployment, select "New version", and click Deploy.
+ *    F: Series 1 Session 1 Teacher Link
+ *    G: Series 1 Session 1 Gallery Link
+ *    H: Series 1 Session 2 Teacher Link
+ *    I: Series 1 Session 4 Teacher Link
+ *    J: Series 1 Session 4 Gallery Link
+ *    K: Series 1 Session 5 Teacher Link
+ *    L: Series 1 Session 5 Gallery Link
+ *    M: Series 1 Session 2 Gallery Link
+ *    N: Series 1 Session 3 Teacher Link
+ *    O: Series 1 Session 3 Gallery Link
+ *    P: Series 2 Session 1 Teacher Link
+ *    Q: Series 2 Session 1 Gallery Link
+ *    R: Series 2 Session 2 Teacher Link
+ *    S: Series 2 Session 2 Gallery Link
+ *    T: Series 2 Session 3 Teacher Link
+ *    U: Series 2 Session 3 Gallery Link
+ *    V: Series 2 Session 4 Teacher Link
+ *    W: Series 2 Session 4 Gallery Link
+ * 
+ * 5. Click Save.
+ * 6. Click Deploy > New deployment. Select "Web app".
+ * 7. Set "Execute as" to "Me" and "Who has access" to "Anyone". Click Deploy.
+ * 8. Copy the Web App Executable URL and update it in config.js if changed.
  */
 
 function doGet(e) {
@@ -56,7 +76,7 @@ function doGet(e) {
           to: email.trim(),
           subject: "CPD Registration Verification Code",
           htmlBody: "<div style='font-family: sans-serif; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; max-width: 500px;'>" +
-                    "<h2 style='color: #4f46e5; margin-bottom: 20px;'>CPD Registration OTP</h2>" +
+                    "<h2 style='color: #eb1000; margin-bottom: 20px;'>CPD Registration OTP</h2>" +
                     "<p>Thank you for signing up for CPD Classroom.</p>" +
                     "<p>Your 6-digit registration verification code is:</p>" +
                     "<div style='background: #f1f5f9; padding: 15px; border-radius: 6px; font-size: 24px; font-weight: 800; letter-spacing: 4px; text-align: center; color: #1e293b; margin: 20px 0;'>" + otp + "</div>" +
@@ -100,15 +120,16 @@ function doGet(e) {
         lastName.trim(),
         email.trim().toLowerCase(),
         "", // School Name (Col E)
-        "", "", // S1 S1 (Col F, G)
-        "", "", // S1 S2 (Col H, I)
-        "", "", // S1 S3 (Col J, K)
-        "", "", // S1 S4 (Col L, M)
-        "", "", // S1 S5 (Col N, O)
-        "", "", // S2 S1 (Col P, Q)
-        "", "", // S2 S2 (Col R, S)
-        "", "", // S2 S3 (Col T, U)
-        "", ""  // S2 S4 (Col V, W)
+        "", "", // S1 S1 Teacher, Gallery (Col F, G)
+        "", // S1 S2 Teacher (Col H)
+        "", "", // S1 S4 Teacher, Gallery (Col I, J)
+        "", "", // S1 S5 Teacher, Gallery (Col K, L)
+        "", // S1 S2 Gallery (Col M)
+        "", "", // S1 S3 Teacher, Gallery (Col N, O)
+        "", "", // S2 S1 Teacher, Gallery (Col P, Q)
+        "", "", // S2 S2 Teacher, Gallery (Col R, S)
+        "", "", // S2 S3 Teacher, Gallery (Col T, U)
+        "", ""  // S2 S4 Teacher, Gallery (Col V, W)
       ];
       sheet.appendRow(newRow);
       
@@ -118,7 +139,8 @@ function doGet(e) {
           firstName: firstName.trim(),
           lastName: lastName.trim(),
           email: email.trim().toLowerCase(),
-          schoolName: ""
+          schoolName: "",
+          moduleLinks: {}
         }
       }, e);
     }
@@ -151,7 +173,7 @@ function doGet(e) {
           to: email.trim(),
           subject: "CPD Classroom Verification Code",
           htmlBody: "<div style='font-family: sans-serif; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; max-width: 500px;'>" +
-                    "<h2 style='color: #4f46e5; margin-bottom: 20px;'>CPD Learning Portal Login</h2>" +
+                    "<h2 style='color: #eb1000; margin-bottom: 20px;'>CPD Learning Portal Login</h2>" +
                     "<p>Hello " + userName + ",</p>" +
                     "<p>You are attempting to sign in to your CPD Classroom account.</p>" +
                     "<p>Your 6-digit verification code is:</p>" +
@@ -184,13 +206,15 @@ function doGet(e) {
       for (var i = 1; i < data.length; i++) {
         var row = data[i];
         if (row[3] && row[3].toString().toLowerCase() === email.trim().toLowerCase()) {
+          var links = getModuleLinksFromRow(row);
           return makeJSONResponse({
             success: true,
             user: {
               firstName: row[1],
               lastName: row[2],
               email: row[3],
-              schoolName: row[4] || "" // Column E (index 4)
+              schoolName: row[4] || "", // Column E
+              moduleLinks: links
             }
           }, e);
         }
@@ -212,7 +236,7 @@ function doGet(e) {
       }
       
       if (userRowIdx !== -1) {
-        sheet.getRange(userRowIdx, 5).setValue(schoolName); // Column E is now 5
+        sheet.getRange(userRowIdx, 5).setValue(schoolName); // Column E (5)
         return makeJSONResponse({ success: true }, e);
       }
       return makeJSONResponse({ success: false, error: "User not found" }, e);
@@ -237,21 +261,32 @@ function doGet(e) {
         return makeJSONResponse({ success: false, error: "User not found" }, e);
       }
       
-      var baseCol;
-      if (moduleId === 1) baseCol = 6;       // S1 S1 (Col F)
-      else if (moduleId === 3) baseCol = 8;   // S1 S2 (Col H)
-      else if (moduleId === 5) baseCol = 10;  // S1 S3 (Col J)
-      else if (moduleId === 7) baseCol = 12;  // S1 S4 (Col L)
-      else if (moduleId === 9) baseCol = 14;  // S1 S5 (Col N)
-      else if (moduleId === 2) baseCol = 16;  // S2 S1 (Col P)
-      else if (moduleId === 4) baseCol = 18;  // S2 S2 (Col R)
-      else if (moduleId === 6) baseCol = 20;  // S2 S3 (Col T)
-      else if (moduleId === 8) baseCol = 22;  // S2 S4 (Col V)
-      else baseCol = 6;
+      var targetCol;
+      if (moduleId === 1) {
+        targetCol = (linkType === "teacher") ? 6 : 7;   // Col F (6), G (7)
+      } else if (moduleId === 3) {
+        targetCol = (linkType === "teacher") ? 8 : 13;  // Col H (8), M (13)
+      } else if (moduleId === 5) {
+        targetCol = (linkType === "teacher") ? 14 : 15; // Col N (14), O (15)
+      } else if (moduleId === 7) {
+        targetCol = (linkType === "teacher") ? 9 : 10;  // Col I (9), J (10)
+      } else if (moduleId === 9) {
+        targetCol = (linkType === "teacher") ? 11 : 12; // Col K (11), L (12)
+      } else if (moduleId === 2) {
+        targetCol = (linkType === "teacher") ? 16 : 17; // Col P (16), Q (17)
+      } else if (moduleId === 4) {
+        targetCol = (linkType === "teacher") ? 18 : 19; // Col R (18), S (19)
+      } else if (moduleId === 6) {
+        targetCol = (linkType === "teacher") ? 20 : 21; // Col T (20), U (21)
+      } else if (moduleId === 8) {
+        targetCol = (linkType === "teacher") ? 22 : 23; // Col V (22), W (23)
+      }
       
-      var targetCol = (linkType === "teacher") ? baseCol : baseCol + 1;
-      sheet.getRange(userRowIdx, targetCol).setValue(url);
-      return makeJSONResponse({ success: true }, e);
+      if (targetCol) {
+        sheet.getRange(userRowIdx, targetCol).setValue(url);
+        return makeJSONResponse({ success: true }, e);
+      }
+      return makeJSONResponse({ success: false, error: "Invalid module ID" }, e);
     }
     
     // 8. Check Link Unique
@@ -281,6 +316,20 @@ function doGet(e) {
 
 function doPost(e) {
   return doGet(e);
+}
+
+function getModuleLinksFromRow(row) {
+  return {
+    "1": { teacherLink: row[5] || "", galleryLink: row[6] || "" },   // S1 S1 (Col F, G)
+    "3": { teacherLink: row[7] || "", galleryLink: row[12] || "" },  // S1 S2 (Col H, M)
+    "5": { teacherLink: row[13] || "", galleryLink: row[14] || "" }, // S1 S3 (Col N, O)
+    "7": { teacherLink: row[8] || "", galleryLink: row[9] || "" },   // S1 S4 (Col I, J)
+    "9": { teacherLink: row[10] || "", galleryLink: row[11] || "" }, // S1 S5 (Col K, L)
+    "2": { teacherLink: row[15] || "", galleryLink: row[16] || "" }, // S2 S1 (Col P, Q)
+    "4": { teacherLink: row[17] || "", galleryLink: row[18] || "" }, // S2 S2 (Col R, S)
+    "6": { teacherLink: row[19] || "", galleryLink: row[20] || "" }, // S2 S3 (Col T, U)
+    "8": { teacherLink: row[21] || "", galleryLink: row[22] || "" }  // S2 S4 (Col V, W)
+  };
 }
 
 function makeJSONResponse(object, e) {

@@ -242,6 +242,7 @@ export function useProgress() {
       email: email,
       schoolName: user.schoolName || existingProgress.schoolName || "",
       userName: `${user.firstName} ${user.lastName}`.trim(),
+      moduleLinks: user.moduleLinks || existingProgress.moduleLinks || {},
     };
     
     setProgress(merged);
