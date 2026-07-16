@@ -93,6 +93,17 @@ export default function ModuleSelectionPage({
                             />
                           </div>
                         )}
+                        {active && !isComingSoon && (
+                          <button
+                            className="btn btn-primary btn-sm mobile-start-btn"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onNavigate("session", { moduleId: mod.id });
+                            }}
+                          >
+                            Start Session →
+                          </button>
+                        )}
                       </div>
                     </div>
                   );
