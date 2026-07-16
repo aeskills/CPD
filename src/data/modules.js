@@ -3,8 +3,8 @@
 
 export const courseInfo = {
   title: "CPD Foundation Program",
-  subtitle: "Elevate your professional practice with structured, certified learning",
-  organization: "CPD - Continuous Professional Development",
+  subtitle: "Elevate your teaching practice with structured, certified learning",
+  organization: "Adobe Express for Education",
   faculty: [
     {
       id: 1,
@@ -14,7 +14,7 @@ export const courseInfo = {
     },
   ],
   overview:
-    "The CPD Foundation Program is a comprehensive continuing professional development course designed to enhance your skills, deepen your knowledge, and keep you at the forefront of your profession. Through structured video lectures, interactive quizzes, and practical assignments, you will gain the competencies needed to excel in today's rapidly evolving professional landscape.",
+    "The CPD Foundation Program is a structured professional development course designed to help educators bring digital creativity into their teaching. Through guided lessons, interactive assessments, and applied projects, you will build the practical skills to create engaging learning materials and to guide your students in developing these same digital skills, empowering them to design and build projects of their own.",
   benefits: [
     "Official CPD certification upon completion",
     "Access to advanced professional tools and frameworks",
@@ -29,6 +29,8 @@ export const modules = [
   // ─── CPD Series 1 - Session 1 ────────────────────────────────────
   {
     id: 1,
+    series: 1,
+    session: 1,
     title: "CPD Series 1 - Session 1 — Implementation of NEP 2020 & SDGs in Schools through Digital Creativity",
     topic: "Implementation of NEP 2020 & SDGs in Schools through Digital Creativity",
     description:
@@ -49,7 +51,7 @@ To support classroom implementation, tutorial videos and remixable Adobe Express
     ],
     lessonCount: 3,
     videoCount: 3,
-    quizCount: 1,
+    quizCount: 0,
     videos: [
       {
         id: "v1-1",
@@ -75,7 +77,7 @@ To support classroom implementation, tutorial videos and remixable Adobe Express
     ],
     resourceSections: [
       {
-        title: "Gen AI Remixable Templates",
+        title: "Sample Templates",
         icon: "🤖",
         resources: [
           {
@@ -204,6 +206,8 @@ To support classroom implementation, tutorial videos and remixable Adobe Express
   // ─── CPD Series 2 - Session 1 ────────────────────────────────────
   {
     id: 2,
+    series: 2,
+    session: 1,
     title: "CPD Series 2 - Session 1 — Leveraging Creative Thinking and AI Enabled Pedagogies to Enhance Classroom Learning Outcomes",
     topic: "Leveraging Creative Thinking and AI Enabled Pedagogies to Enhance Classroom Learning Outcomes",
     description:
@@ -235,7 +239,7 @@ Learning Journal`,
     ],
     lessonCount: 6,
     videoCount: 6,
-    quizCount: 1,
+    quizCount: 0,
     videos: [
       {
         id: "v2-1",
@@ -452,6 +456,8 @@ Learning Journal`,
   // ─── CPD Series 1 - Session 2 ────────────────────────────────────
   {
     id: 3,
+    series: 1,
+    session: 2,
     title: "CPD Series 1 - Session 2 — Enhance Classroom Organization with Adobe Express Lesson Plans & Calendars",
     topic: "Enhance Classroom Organization with Adobe Express Lesson Plans & Calendars",
     description:
@@ -472,8 +478,8 @@ To support implementation, step-by-step tutorial videos and remixable templates 
       "Designing a calendar",
     ],
     lessonCount: 4,
-    videoCount: 3,
-    quizCount: 1,
+    videoCount: 4,
+    quizCount: 0,
     videos: [
       {
         id: "v3-1",
@@ -499,10 +505,9 @@ To support implementation, step-by-step tutorial videos and remixable templates 
       {
         id: "v3-4",
         title: "Designing a calendar",
-        youtubeId: null,
-        duration: "Coming Soon",
+        youtubeId: "G6rC8XW4WS8",
+        duration: "9:39",
         source: "YOUTUBE",
-        comingSoon: true,
       },
     ],
     resourceSections: [
@@ -657,6 +662,8 @@ To support implementation, step-by-step tutorial videos and remixable templates 
   // ─── CPD Series 2 - Session 2 ────────────────────────────────────
   {
     id: 4,
+    series: 2,
+    session: 2,
     title: "CPD Series 2 - Session 2 — SEL in the Classroom: From Awareness to Action",
     topic: "SEL in the Classroom: From Awareness to Action",
     description:
@@ -676,32 +683,29 @@ To support implementation, step-by-step tutorial videos and remixable templates 
       "Activity on My Calm-Down Toolkit",
     ],
     lessonCount: 3,
-    videoCount: 0,
-    quizCount: 1,
+    videoCount: 3,
+    quizCount: 0,
     videos: [
       {
         id: "v4-1",
         title: "Create a Comic Strip",
-        youtubeId: null,
-        duration: "Coming Soon",
+        youtubeId: "yo18LrVT1jk",
+        duration: "7:33",
         source: "YOUTUBE",
-        comingSoon: true,
       },
       {
         id: "v4-2",
         title: "Activity on My Strength",
-        youtubeId: null,
-        duration: "Coming Soon",
+        youtubeId: "IIadGaqO_t8",
+        duration: "8:11",
         source: "YOUTUBE",
-        comingSoon: true,
       },
       {
         id: "v4-3",
         title: "Activity on My Calm-Down Toolkit",
-        youtubeId: null,
-        duration: "Coming Soon",
+        youtubeId: "mYr-JUfU6gA",
+        duration: "13:53",
         source: "YOUTUBE",
-        comingSoon: true,
       },
     ],
     resourceSections: [
@@ -853,4 +857,213 @@ To support implementation, step-by-step tutorial videos and remixable templates 
         ],
   },
 
+  // ─── CPD Series 1 - Session 3 ────────────────────────────────────
+  {
+    id: 5,
+    series: 1,
+    session: 3,
+    title: "CPD Series 1 - Session 3 — Introduction to Socio-Emotional Learning (SEL) in the Classroom Using Adobe Express",
+    topic: "Introduction to Socio-Emotional Learning (SEL) in the Classroom Using Adobe Express",
+    description:
+      `This session introduces educators to the core concepts of Social and Emotional Learning (SEL) and its five competencies—Self-Awareness, Self-Management, Social Awareness, Relationship Skills, and Responsible Decision-Making. Teachers explore how SEL supports student well-being, positive relationships, emotional resilience, and an inclusive classroom environment.
+
+Using Adobe Express, educators and students learn to create engaging SEL resources such as reflective journals/gratitude journals and affirmation posters that promote SEL competencies.
+
+To support implementation, step-by-step tutorial videos and suggestive templates which can be remixed are provided, enabling teachers to customize resources according to their classroom needs or create their own designs from scratch.`,
+    objectives: [
+      `This session introduces educators to the core concepts of Social and Emotional Learning (SEL) and its five competencies—Self-Awareness, Self-Management, Social Awareness, Relationship Skills, and Responsible Decision-Making. Teachers explore how SEL supports student well-being, positive relationships, emotional resilience, and an inclusive classroom environment.`,
+      `Using Adobe Express, educators and students learn to create engaging SEL resources such as reflective journals/gratitude journals and affirmation posters that promote SEL competencies.`,
+      `To support implementation, step-by-step tutorial videos and suggestive templates which can be remixed are provided, enabling teachers to customize resources according to their classroom needs or create their own designs from scratch.`,
+    ],
+    lessons: [
+      "Gratitude Journal",
+      "My Superpower Poster",
+    ],
+    lessonCount: 2,
+    videoCount: 2,
+    quizCount: 0,
+    videos: [
+      {
+        id: "v5-1",
+        title: "Gratitude Journal",
+        youtubeId: "jW019UIr0Is",
+        duration: "10:02",
+        source: "YOUTUBE",
+      },
+      {
+        id: "v5-2",
+        title: "My Superpower Poster",
+        youtubeId: "jRkxQEfDhG0",
+        duration: "3:43",
+        source: "YOUTUBE",
+      },
+    ],
+    resourceSections: [
+      {
+        title: "Remixable Templates",
+        icon: "📓",
+        resources: [
+          {
+            title: "Gratitude Journal",
+            type: "Template",
+            url: "https://new.express.adobe.com/webpage/cKgfko4ZtrsGh/remix",
+          },
+          {
+            title: "My Superpower Poster",
+            type: "Template",
+            url: "https://new.express.adobe.com/publishedV2/urn:aaid:sc:AP:d2f71114-4387-5e5f-adf1-0ec75a1f7ac3?promoid=Y69SGM5H&sdid=C4SZ2FYJ&mv=other",
+          },
+        ],
+      },
+    ],
+    resources: [],
+    quiz: [
+      {
+        question: "What are the five competencies of Social and Emotional Learning (SEL)?",
+        options: [
+          "Reading, Writing, Math, Science, Art",
+          "Self-Awareness, Self-Management, Social Awareness, Relationship Skills, Responsible Decision-Making",
+          "Speaking, Listening, Presenting, Writing, Drawing",
+          "Creativity, Critical Thinking, Collaboration, Communication, Citizenship",
+        ],
+        correct: 1,
+      },
+      {
+        question: "Which SEL competency is developed by reflecting on things you are grateful for?",
+        options: [
+          "Self-Management",
+          "Self-Awareness and Social Awareness",
+          "Physical Fitness",
+          "Computer Literacy",
+        ],
+        correct: 1,
+      },
+      {
+        question: "The 'My Superpower Poster' activity primarily helps students build:",
+        options: [
+          "Physical strength",
+          "Self-Awareness and Self-Confidence",
+          "Programming skills",
+          "Math speed",
+        ],
+        correct: 1,
+      },
+      {
+        question: "How does a Gratitude Journal support student well-being?",
+        options: [
+          "By replacing their school grades",
+          "By cultivating a positive mindset and empathy",
+          "By teaching them typing skills",
+          "By storing passwords",
+        ],
+        correct: 1,
+      },
+      {
+        question: "Which Adobe Express feature allows you to customize existing SEL templates?",
+        options: [
+          "Crop",
+          "Remix",
+          "Delete",
+          "Filter",
+        ],
+        correct: 1,
+      },
+    ],
+  },
+  // ─── CPD Series 1 - Session 4 [COMING SOON] ──────────────────────────
+  {
+    id: 7,
+    series: 1,
+    session: 4,
+    title: "CPD Series 1 - Session 4",
+    topic: "Introduction to CPD Series 1 - Session 4",
+    description: "This session is coming soon. Stay tuned!",
+    objectives: ["Coming soon"],
+    lessons: ["Coming soon"],
+    lessonCount: 0,
+    videoCount: 0,
+    quizCount: 0,
+    videos: [
+      {
+        id: "v7-1",
+        title: "Introduction",
+        comingSoon: true,
+        duration: "0:00",
+      }
+    ],
+    resources: [],
+    quiz: []
+  },
+  // ─── CPD Series 1 - Session 5 [COMING SOON] ──────────────────────────
+  {
+    id: 9,
+    series: 1,
+    session: 5,
+    title: "CPD Series 1 - Session 5",
+    topic: "Introduction to CPD Series 1 - Session 5",
+    description: "This session is coming soon. Stay tuned!",
+    objectives: ["Coming soon"],
+    lessons: ["Coming soon"],
+    lessonCount: 0,
+    videoCount: 0,
+    quizCount: 0,
+    videos: [
+      {
+        id: "v9-1",
+        title: "Introduction",
+        comingSoon: true,
+        duration: "0:00",
+      }
+    ],
+    resources: [],
+    quiz: []
+  },
+  // ─── CPD Series 2 - Session 3 [COMING SOON] ──────────────────────────
+  {
+    id: 6,
+    series: 2,
+    session: 3,
+    title: "CPD Series 2 - Session 3",
+    topic: "Introduction to CPD Series 2 - Session 3",
+    description: "This session is coming soon. Stay tuned!",
+    objectives: ["Coming soon"],
+    lessons: ["Coming soon"],
+    lessonCount: 0,
+    videoCount: 0,
+    quizCount: 0,
+    videos: [
+      {
+        id: "v6-1",
+        title: "Introduction",
+        comingSoon: true,
+        duration: "0:00",
+      }
+    ],
+    resources: [],
+    quiz: []
+  },
+  // ─── CPD Series 2 - Session 4 [COMING SOON] ──────────────────────────
+  {
+    id: 8,
+    series: 2,
+    session: 4,
+    title: "CPD Series 2 - Session 4",
+    topic: "Introduction to CPD Series 2 - Session 4",
+    description: "This session is coming soon. Stay tuned!",
+    objectives: ["Coming soon"],
+    lessons: ["Coming soon"],
+    lessonCount: 0,
+    videoCount: 0,
+    quizCount: 0,
+    videos: [
+      {
+        id: "v8-1",
+        title: "Introduction",
+        comingSoon: true,
+        duration: "0:00",
+      }
+    ],
+    resources: [],
+    quiz: []
+  }
 ];

@@ -2,7 +2,6 @@ import { useState, useCallback, useEffect } from "react";
 import { modules } from "../data/modules";
 import VideoPlayer from "../components/VideoPlayer";
 import Sidebar from "../components/Sidebar";
-import QuizModal from "../components/QuizModal";
 
 export default function SessionPage({
   moduleId,
@@ -12,9 +11,9 @@ export default function SessionPage({
   isVideoComplete,
   areAllVideosComplete,
   isAllComplete,
-  submitQuiz,
   progress,
   addToast,
+  updateModuleLinks,
 }) {
   const module = modules.find((m) => m.id === moduleId) || modules[0];
   const playableVideos = module.videos.filter((v) => !v.comingSoon);
@@ -76,17 +75,11 @@ export default function SessionPage({
   };
 
   const handleOpenQuiz = () => {
-    setShowQuiz(true);
+    // Quiz removed
   };
 
   const handleQuizComplete = (score, total) => {
-    const passed = submitQuiz(module.id, score, total);
-    setShowQuiz(false);
-    if (passed) {
-      addToast("🎉 Quiz passed successfully!", "success");
-    } else {
-      addToast("Quiz not passed. Keep trying!", "error");
-    }
+    // Quiz removed
   };
 
   const handleEndSession = () => {
@@ -196,26 +189,17 @@ export default function SessionPage({
           module={module}
           currentVideoId={currentVideo?.id}
           onSelectVideo={handleSelectVideo}
-          onOpenQuiz={handleOpenQuiz}
           videoProgress={progress.videoProgress}
           isVideoComplete={isVideoComplete}
           areAllVideosComplete={areAllVideosComplete}
-          quizPassed={quizPassed}
           onEndSession={handleEndSession}
           isMobileOpen={mobileSidebar}
           onCloseMobile={() => setMobileSidebar(false)}
+          moduleLinks={progress.moduleLinks || {}}
+          updateModuleLinks={updateModuleLinks}
+          userEmail={progress.email}
         />
       </div>
-
-      {/* Quiz Modal */}
-      {showQuiz && (
-        <QuizModal
-          quiz={module.quiz}
-          moduleTitle={module.title}
-          onComplete={handleQuizComplete}
-          onClose={() => setShowQuiz(false)}
-        />
-      )}
     </div>
   );
 }

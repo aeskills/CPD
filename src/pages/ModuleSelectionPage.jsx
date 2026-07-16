@@ -13,17 +13,17 @@ export default function ModuleSelectionPage({
   const seriesGroups = [
     {
       title: "CPD Series 1",
-      sessions: [
-        { ...modules[0], displayName: "Session 1" },
-        { ...modules[2], displayName: "Session 2" },
-      ],
+      sessions: modules
+        .filter((m) => m.series === 1)
+        .sort((a, b) => a.session - b.session)
+        .map((m) => ({ ...m, displayName: `Session ${m.session}` })),
     },
     {
       title: "CPD Series 2",
-      sessions: [
-        { ...modules[1], displayName: "Session 1" },
-        { ...modules[3], displayName: "Session 2" },
-      ],
+      sessions: modules
+        .filter((m) => m.series === 2)
+        .sort((a, b) => a.session - b.session)
+        .map((m) => ({ ...m, displayName: `Session ${m.session}` })),
     },
   ];
 
@@ -37,14 +37,7 @@ export default function ModuleSelectionPage({
 
   return (
     <div className="modules-page animate-fade-in">
-      <div className="top-bar-nav" style={{ marginBottom: "var(--space-4)", display: "flex", justifyContent: "flex-start" }}>
-        <button
-          className="btn btn-ghost btn-sm back-to-home-top"
-          onClick={() => onNavigate("landing")}
-        >
-          ← Back to Home
-        </button>
-      </div>
+
 
       <div className="modules-header" style={{ marginTop: "0" }}>
         <h1>Course Dashboard</h1>
@@ -63,27 +56,36 @@ export default function ModuleSelectionPage({
                   const complete = isModuleComplete(mod.id);
                   const active = selectedModule.id === mod.id;
                   const completion = getModuleCompletion(mod);
+                  const isComingSoon = mod.videos && mod.videos.every((v) => v.comingSoon);
 
                   return (
                     <div
                       key={mod.id}
-                      className={`module-item ${active ? "module-active" : ""} ${complete ? "module-complete" : ""}`}
-                      onClick={() => handleModuleClick(mod)}
+                      className={`module-item ${active ? "module-active" : ""} ${complete ? "module-complete" : ""} ${isComingSoon ? "coming-soon" : ""}`}
+                      onClick={() => {
+                        if (!isComingSoon) {
+                          handleModuleClick(mod);
+                        }
+                      }}
                       style={{ opacity: 0, animation: `fadeInUp 400ms ease ${mod.id * 80}ms forwards` }}
                     >
                       <div className="module-number">
-                        {complete ? "✓" : mod.displayName === "Session 1" ? "S1" : "S2"}
+                        {complete ? "✓" : `S${mod.session}`}
                       </div>
                       <div className="module-info">
-                        <h3>{mod.displayName}</h3>
+                        <h3 title={isComingSoon ? "Coming Soon" : mod.topic}>
+                          {isComingSoon ? "Coming Soon" : mod.topic}
+                        </h3>
                         <span className="module-status">
-                          {complete
-                            ? "Completed"
-                            : completion > 0
-                              ? `${completion}% complete`
-                              : "Not started"}
+                          {isComingSoon
+                            ? "Coming Soon"
+                            : complete
+                              ? "Completed"
+                              : completion > 0
+                                ? `${completion}% complete`
+                                : "Not started"}
                         </span>
-                        {!complete && (
+                        {!complete && !isComingSoon && (
                           <div className="module-progress-bar">
                             <div
                               className="module-progress-fill"
@@ -134,10 +136,12 @@ export default function ModuleSelectionPage({
               <span className="pill-dot" style={{ background: "var(--gold)" }} />
               {selectedModule.videoCount} Videos
             </span>
-            <span className="content-pill">
-              <span className="pill-dot" style={{ background: "var(--success)" }} />
-              {selectedModule.quizCount} Quizzes
-            </span>
+            {selectedModule.quizCount > 0 && (
+              <span className="content-pill">
+                <span className="pill-dot" style={{ background: "var(--success)" }} />
+                {selectedModule.quizCount} Quizzes
+              </span>
+            )}
             {selectedModule.resourceSections && selectedModule.resourceSections.length > 0 && (
               <span className="content-pill">
                 <span className="pill-dot" style={{ background: "#a78bfa" }} />

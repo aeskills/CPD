@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Confetti from "../components/Confetti";
-import { courseInfo } from "../data/modules";
+import { courseInfo, modules } from "../data/modules";
 
 export default function CertificatePage({ userName, setUserName, onNavigate }) {
   const [name, setName] = useState(userName || "");
@@ -105,7 +105,9 @@ export default function CertificatePage({ userName, setUserName, onNavigate }) {
               </div>
               <div className="cert-detail">
                 <div className="cert-detail-label">Sessions</div>
-                <div className="cert-detail-value">2 Series (4 Sessions) Completed</div>
+                <div className="cert-detail-value">
+                  2 Series ({modules.filter((m) => m.videos && m.videos.some((v) => !v.comingSoon)).length} Sessions) Completed
+                </div>
               </div>
             </div>
 

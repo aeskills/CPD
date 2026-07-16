@@ -1,33 +1,77 @@
 import { useState, useCallback, useEffect } from "react";
+import { modules } from "../data/modules";
 
-const STORAGE_KEY = "cpd_progress";
+const STORAGE_PREFIX = "cpd_progress_";
+const ACTIVE_USER_KEY = "cpd_active_user";
 
-function loadProgress() {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) return JSON.parse(stored);
-  } catch (e) {
-    console.warn("Failed to load progress:", e);
-  }
+function getUserStorageKey(email) {
+  return STORAGE_PREFIX + (email || "anonymous").toLowerCase().trim();
+}
+
+function getDefaultProgress() {
   return {
     videoProgress: {},    // { "v1-1": 98, "v1-2": 45, ... } — percentage watched
     quizScores: {},       // { 1: 8, 2: 9, ... } — score out of 10
     quizPassed: {},       // { 1: true, 2: false, ... }
-    modulesUnlocked: [1, 2, 3, 4], // all modules unlocked — free access
+    modulesUnlocked: modules.map((m) => m.id), // all modules unlocked — free access
     completedModules: [], // fully completed modules
     userName: "",
+    firstName: "",
+    lastName: "",
+    schoolName: "",
+    email: "",
+    isLoggedIn: false,    // whether user is authenticated
+    moduleLinks: {},      // { moduleId: { teacherLink: "", galleryLink: "" } }
   };
+}
+
+function loadProgress() {
+  try {
+    // Check if there's an active user session
+    const activeEmail = localStorage.getItem(ACTIVE_USER_KEY);
+    if (activeEmail) {
+      const key = getUserStorageKey(activeEmail);
+      const stored = localStorage.getItem(key);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        // Ensure isLoggedIn is true for active sessions
+        parsed.isLoggedIn = true;
+        return parsed;
+      }
+    }
+    
+    // Migrate old single-key data if it exists (one-time migration)
+    const oldData = localStorage.getItem("cpd_progress");
+    if (oldData) {
+      const parsed = JSON.parse(oldData);
+      if (parsed.email && parsed.isLoggedIn) {
+        // Save under new user-specific key
+        const key = getUserStorageKey(parsed.email);
+        localStorage.setItem(key, JSON.stringify(parsed));
+        localStorage.setItem(ACTIVE_USER_KEY, parsed.email);
+        localStorage.removeItem("cpd_progress");
+        return parsed;
+      }
+      // Old data without email — just remove it
+      localStorage.removeItem("cpd_progress");
+    }
+  } catch (e) {
+    console.warn("Failed to load progress:", e);
+  }
+  return getDefaultProgress();
 }
 
 function saveProgress(progress) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    if (progress.isLoggedIn && progress.email) {
+      const key = getUserStorageKey(progress.email);
+      localStorage.setItem(key, JSON.stringify(progress));
+      localStorage.setItem(ACTIVE_USER_KEY, progress.email);
+    }
   } catch (e) {
     console.warn("Failed to save progress:", e);
   }
 }
-
-import { modules } from "../data/modules";
 
 export function useProgress() {
   const [progress, setProgress] = useState(loadProgress);
@@ -142,8 +186,12 @@ export function useProgress() {
   );
 
   const isAllComplete = useCallback(() => {
-    return [1, 2, 3, 4].every((id) =>
-      progress.completedModules.includes(id)
+    // Only require completion for active modules that have playable videos
+    const activeModules = modules.filter((m) => 
+      m.videos && m.videos.some((v) => !v.comingSoon)
+    );
+    return activeModules.every((m) =>
+      progress.completedModules.includes(m.id)
     );
   }, [progress.completedModules]);
 
@@ -152,16 +200,66 @@ export function useProgress() {
   }, []);
 
   const resetProgress = useCallback(() => {
-    const fresh = {
-      videoProgress: {},
-      quizScores: {},
-      quizPassed: {},
-      modulesUnlocked: [1, 2, 3, 4],
-      completedModules: [],
-      userName: "",
-    };
+    const fresh = getDefaultProgress();
     setProgress(fresh);
-    saveProgress(fresh);
+    localStorage.removeItem(ACTIVE_USER_KEY);
+  }, []);
+
+  const updateModuleLinks = useCallback((moduleId, teacherLink, galleryLink) => {
+    setProgress((prev) => {
+      const newLinks = {
+        ...prev.moduleLinks,
+        [moduleId]: { teacherLink, galleryLink },
+      };
+      return {
+        ...prev,
+        moduleLinks: newLinks,
+      };
+    });
+  }, []);
+
+  const loginUser = useCallback((user) => {
+    const email = (user.email || "").toLowerCase().trim();
+    
+    // Load this specific user's saved progress (if they logged in before)
+    let existingProgress = getDefaultProgress();
+    try {
+      const key = getUserStorageKey(email);
+      const stored = localStorage.getItem(key);
+      if (stored) {
+        existingProgress = JSON.parse(stored);
+      }
+    } catch (e) {
+      console.warn("Failed to load user progress:", e);
+    }
+    
+    // Merge user identity with their saved progress
+    const merged = {
+      ...existingProgress,
+      isLoggedIn: true,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: email,
+      schoolName: user.schoolName || existingProgress.schoolName || "",
+      userName: `${user.firstName} ${user.lastName}`.trim(),
+    };
+    
+    setProgress(merged);
+    localStorage.setItem(ACTIVE_USER_KEY, email);
+  }, []);
+
+  const updateSchoolName = useCallback((schoolName) => {
+    setProgress((prev) => ({
+      ...prev,
+      schoolName: schoolName,
+    }));
+  }, []);
+
+  const logoutUser = useCallback(() => {
+    // Clear the active session marker
+    localStorage.removeItem(ACTIVE_USER_KEY);
+    // Reset to a completely fresh state
+    setProgress(getDefaultProgress());
   }, []);
 
   return {
@@ -178,5 +276,9 @@ export function useProgress() {
     isAllComplete,
     setUserName,
     resetProgress,
+    updateModuleLinks,
+    loginUser,
+    updateSchoolName,
+    logoutUser,
   };
 }

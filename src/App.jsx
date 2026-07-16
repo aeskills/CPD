@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useProgress } from "./hooks/useProgress";
 import { ToastProvider } from "./components/Toast";
 import Navbar from "./components/Navbar";
@@ -8,10 +8,6 @@ import SessionPage from "./pages/SessionPage";
 import CertificatePage from "./pages/CertificatePage";
 
 export default function App() {
-  const [page, setPage] = useState("landing");
-  const [pageData, setPageData] = useState({});
-  const [transitioning, setTransitioning] = useState(false);
-
   const {
     progress,
     updateVideoProgress,
@@ -26,7 +22,25 @@ export default function App() {
     isAllComplete,
     setUserName,
     resetProgress,
+    updateModuleLinks,
+    loginUser,
+    updateSchoolName,
+    logoutUser,
   } = useProgress();
+
+  const [page, setPage] = useState(progress.isLoggedIn ? "modules" : "landing");
+  const [pageData, setPageData] = useState({});
+  const [transitioning, setTransitioning] = useState(false);
+
+  useEffect(() => {
+    if (progress.isLoggedIn && progress.schoolName) {
+      if (page === "landing") {
+        setPage("modules");
+      }
+    } else if (!progress.isLoggedIn) {
+      setPage("landing");
+    }
+  }, [progress.isLoggedIn, progress.schoolName]);
 
   const navigate = useCallback((target, data = {}) => {
     setTransitioning(true);
@@ -42,7 +56,15 @@ export default function App() {
     <ToastProvider>
       {(addToast) => (
         <div id="app-root">
-          <Navbar onNavigate={navigate} currentPage={page} />
+           {page !== "landing" && (
+             <Navbar 
+              onNavigate={navigate} 
+              currentPage={page} 
+              isLoggedIn={progress.isLoggedIn}
+              userName={progress.userName}
+              onLogout={logoutUser}
+             />
+           )}
 
           <main
             className={transitioning ? "page-exit-active" : "page-enter-active"}
@@ -51,7 +73,12 @@ export default function App() {
             }}
           >
             {page === "landing" && (
-              <LandingPage onNavigate={navigate} />
+              <LandingPage 
+                onNavigate={navigate} 
+                progress={progress}
+                loginUser={loginUser}
+                updateSchoolName={updateSchoolName}
+              />
             )}
 
             {page === "modules" && (
@@ -83,6 +110,7 @@ export default function App() {
                 submitQuiz={submitQuiz}
                 progress={progress}
                 addToast={addToast}
+                updateModuleLinks={updateModuleLinks}
               />
             )}
 
