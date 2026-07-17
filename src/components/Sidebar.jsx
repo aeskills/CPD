@@ -109,10 +109,12 @@ export default function Sidebar({
         setTeacherError(false);
         setTeacherSuccess(true);
         updateModuleLinks(module.id, linkValue, galleryLink);
+        setTeacherLink(""); // Clear input on success
       } else {
         setGalleryError(false);
         setGallerySuccess(true);
         updateModuleLinks(module.id, teacherLink, linkValue);
+        setGalleryLink(""); // Clear input on success
       }
     } catch (err) {
       console.error("Link submission failed:", err);
@@ -121,10 +123,12 @@ export default function Sidebar({
         setTeacherError(false);
         setTeacherSuccess(true);
         updateModuleLinks(module.id, linkValue, galleryLink);
+        setTeacherLink(""); // Clear input on success
       } else {
         setGalleryError(false);
         setGallerySuccess(true);
         updateModuleLinks(module.id, teacherLink, linkValue);
+        setGalleryLink(""); // Clear input on success
       }
     } finally {
       if (isTeacher) {
