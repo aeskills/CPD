@@ -20,13 +20,12 @@ export default function Sidebar({
   const [videosExpanded, setVideosExpanded] = useState(true);
   const [expandedSections, setExpandedSections] = useState({});
 
-  const linksForModule = moduleLinks[module.id] || { teacherLink: "", galleryLink: "" };
-  const [teacherLink, setTeacherLink] = useState(linksForModule.teacherLink || "");
-  const [galleryLink, setGalleryLink] = useState(linksForModule.galleryLink || "");
+  const [teacherLink, setTeacherLink] = useState("");
+  const [galleryLink, setGalleryLink] = useState("");
   const [teacherError, setTeacherError] = useState(false);
   const [galleryError, setGalleryError] = useState(false);
-  const [teacherSuccess, setTeacherSuccess] = useState(!!linksForModule.teacherLink);
-  const [gallerySuccess, setGallerySuccess] = useState(!!linksForModule.galleryLink);
+  const [teacherSuccess, setTeacherSuccess] = useState(false);
+  const [gallerySuccess, setGallerySuccess] = useState(false);
 
   const [teacherErrorMessage, setTeacherErrorMessage] = useState("");
   const [galleryErrorMessage, setGalleryErrorMessage] = useState("");
@@ -34,16 +33,15 @@ export default function Sidebar({
   const [isSubmittingGallery, setIsSubmittingGallery] = useState(false);
 
   useEffect(() => {
-    const links = moduleLinks[module.id] || { teacherLink: "", galleryLink: "" };
-    setTeacherLink(links.teacherLink || "");
-    setGalleryLink(links.galleryLink || "");
+    setTeacherLink("");
+    setGalleryLink("");
     setTeacherError(false);
     setGalleryError(false);
-    setTeacherSuccess(!!links.teacherLink);
-    setGallerySuccess(!!links.galleryLink);
+    setTeacherSuccess(false);
+    setGallerySuccess(false);
     setTeacherErrorMessage("");
     setGalleryErrorMessage("");
-  }, [module.id, moduleLinks]);
+  }, [module.id]);
 
   const validateLink = (url) => {
     if (!url || !url.trim()) return false;

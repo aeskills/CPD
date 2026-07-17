@@ -283,7 +283,9 @@ function doGet(e) {
       }
       
       if (targetCol) {
-        sheet.getRange(userRowIdx, targetCol).setValue(url);
+        var existingValue = sheet.getRange(userRowIdx, targetCol).getValue().toString().trim();
+        var newValue = appendLinkToCell(existingValue, url);
+        sheet.getRange(userRowIdx, targetCol).setValue(newValue);
         return makeJSONResponse({ success: true }, e);
       }
       return makeJSONResponse({ success: false, error: "Invalid module ID" }, e);
@@ -295,13 +297,10 @@ function doGet(e) {
       var email = e.parameter.email;
       for (var i = 1; i < data.length; i++) {
         var row = data[i];
-        var rowEmail = row[3];
-        if (rowEmail && rowEmail.toLowerCase() !== email.toLowerCase()) {
-          for (var colIdx = 5; colIdx < 23; colIdx++) { // Index 5 (Col F) to index 22 (Col W)
-            var cellVal = row[colIdx];
-            if (cellVal && cellVal.toString().trim().toLowerCase() === checkLink.trim().toLowerCase()) {
-              return makeJSONResponse({ exists: true }, e);
-            }
+        for (var colIdx = 5; colIdx < 23; colIdx++) { // Index 5 (Col F) to index 22 (Col W)
+          var cellVal = row[colIdx];
+          if (cellContainsLink(cellVal, checkLink)) {
+            return makeJSONResponse({ exists: true }, e);
           }
         }
       }
@@ -354,4 +353,31 @@ function doOptions(e) {
     output.setHeader(key, responseHeaders[key]);
   }
   return output;
+}
+
+function appendLinkToCell(existingValue, url) {
+  if (!existingValue || existingValue.trim() === "") {
+    return "1. " + url;
+  }
+  var lines = existingValue.split("\n").filter(function(line) {
+    return line.trim().length > 0;
+  });
+  var nextIndex = lines.length + 1;
+  return existingValue + "\n" + nextIndex + ". " + url;
+}
+
+function cellContainsLink(cellVal, targetLink) {
+  if (!cellVal) return false;
+  var text = cellVal.toString().trim().toLowerCase();
+  var target = targetLink.trim().toLowerCase();
+  
+  var lines = text.split("\n");
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i].trim();
+    var cleanLine = line.replace(/^\d+\.\s*/, "").trim();
+    if (cleanLine === target) {
+      return true;
+    }
+  }
+  return false;
 }
