@@ -33,6 +33,7 @@ export const modules = [
     session: 1,
     title: "CPD Series 1 - Session 1 — Implementation of NEP 2020 & SDGs in Schools through Digital Creativity",
     topic: "Implementation of NEP 2020 & SDGs in Schools through Digital Creativity",
+    formLink: "https://forms.gle/RsZTh5oU9bHeaTBu7",
     description:
       `This session introduces educators to implementing NEP 2020 and the Sustainable Development Goals (SDGs) through digital creativity using Adobe Express. Teachers explore how technology integration, digital storytelling, and safe Generative AI can enhance classroom instruction while fostering creativity, critical thinking, and student engagement.
 
@@ -210,6 +211,7 @@ To support classroom implementation, tutorial videos and remixable Adobe Express
     session: 1,
     title: "CPD Series 2 - Session 1 — Leveraging Creative Thinking and AI Enabled Pedagogies to Enhance Classroom Learning Outcomes",
     topic: "Leveraging Creative Thinking and AI Enabled Pedagogies to Enhance Classroom Learning Outcomes",
+    formLink: "https://forms.gle/K5tvi1K7LYAYJjgMA",
     description:
       `This session introduces educators to creative thinking, storytelling, experiential learning, and AI-enabled pedagogies to enhance student engagement and improve learning outcomes. Teachers will explore how Adobe Express can support critical and creative thinking and interactive classroom experiences through digital creativity and Generative AI.
 
@@ -458,8 +460,9 @@ Learning Journal`,
     id: 3,
     series: 1,
     session: 2,
-    title: "CPD Series 1 - Session 2 — Enhance Classroom Organization with Adobe Express Lesson Plans & Calendars",
-    topic: "Enhance Classroom Organization with Adobe Express Lesson Plans & Calendars",
+    title: "CPD Series 1 - Session 2 — Classroom Planning & Organization Skills",
+    topic: "Classroom Planning & Organization Skills",
+    formLink: "https://forms.gle/P2A7SJwhYWLcjsJ48",
     description:
       `This session focuses on addressing real classroom challenges such as managing multiple subjects and grade levels, balancing curriculum coverage with meaningful learning, and handling high student-teacher ratios. Educators explore how effective classroom organization can reduce instructional stress, improve productivity, and support alignment with NEP 2020 and curriculum goals.
 
@@ -664,8 +667,9 @@ To support implementation, step-by-step tutorial videos and remixable templates 
     id: 4,
     series: 2,
     session: 2,
-    title: "CPD Series 2 - Session 2 — SEL in the Classroom: From Awareness to Action",
-    topic: "SEL in the Classroom: From Awareness to Action",
+    title: "CPD Series 2 - Session 2 — Socio-Emotional Learning 2.0: Deepening Impact with Digital Creativity & AI",
+    topic: "Socio-Emotional Learning 2.0: Deepening Impact with Digital Creativity & AI",
+    formLink: "https://forms.gle/7RteduKx7p4ncra98",
     description:
       `This session focuses on integrating Social and Emotional Learning (SEL) into everyday classroom teaching using Adobe Express. Educators and students will foster self-awareness, self-management, social awareness, relationship skills, and responsible decision-making through creative, student-centered activities. The session demonstrates how digital creativity can strengthen emotional well-being while enhancing engagement across grade levels.
 
@@ -862,8 +866,9 @@ To support implementation, step-by-step tutorial videos and remixable templates 
     id: 5,
     series: 1,
     session: 3,
-    title: "CPD Series 1 - Session 3 — Introduction to Socio-Emotional Learning (SEL) in the Classroom Using Adobe Express",
-    topic: "Introduction to Socio-Emotional Learning (SEL) in the Classroom Using Adobe Express",
+    title: "CPD Series 1 - Session 3 — Building SocioEmotional Learning (SEL) Skills in the Classroom",
+    topic: "Building SocioEmotional Learning (SEL) Skills in the Classroom",
+    formLink: "https://forms.gle/VmP6cCHnyGp1MyxX6",
     description:
       `This session introduces educators to the core concepts of Social and Emotional Learning (SEL) and its five competencies—Self-Awareness, Self-Management, Social Awareness, Relationship Skills, and Responsible Decision-Making. Teachers explore how SEL supports student well-being, positive relationships, emotional resilience, and an inclusive classroom environment.
 
@@ -970,97 +975,153 @@ To support implementation, step-by-step tutorial videos and suggestive templates
       },
     ],
   },
-  // ─── CPD Series 1 - Session 4 [COMING SOON] ──────────────────────────
+  // ─── CPD Series 1 - Session 4 ────────────────────────────────────
   {
     id: 7,
     series: 1,
     session: 4,
-    title: "CPD Series 1 - Session 4",
-    topic: "Introduction to CPD Series 1 - Session 4",
-    description: "This session is coming soon. Stay tuned!",
-    objectives: ["Coming soon"],
-    lessons: ["Coming soon"],
-    lessonCount: 0,
+    title: "CPD Series 1 - Session 4 — Designing CompetencyBased Assessments & Meaningful Assignments",
+    topic: "Designing CompetencyBased Assessments & Meaningful Assignments",
+    formLink: "https://forms.gle/aWVR5NjbRAUdNVRj9",
+    description: "This session explores designing competency-based assessments and meaningful assignments using Adobe Express to measure student growth, critical thinking, and digital creativity.",
+    objectives: [
+      "Learn practical frameworks for designing competency-based assessments in the classroom.",
+      "Use Adobe Express templates to create rubrics, project briefs, and student assignments.",
+      "Access session materials and submit project links via the official Google Form."
+    ],
+    lessons: [
+      "Designing Competency-Based Assessments Framework",
+      "Creating Meaningful Assignments using Adobe Express",
+    ],
+    lessonCount: 2,
     videoCount: 0,
     quizCount: 0,
-    videos: [
+    videos: [],
+    resourceSections: [
       {
-        id: "v7-1",
-        title: "Introduction",
-        comingSoon: true,
-        duration: "0:00",
+        title: "Session Form & Submissions",
+        icon: "📋",
+        resources: [
+          {
+            title: "Official Session Submission Form",
+            type: "Google Form",
+            url: "https://forms.gle/aWVR5NjbRAUdNVRj9",
+          }
+        ]
       }
     ],
     resources: [],
     quiz: []
   },
-  // ─── CPD Series 1 - Session 5 [COMING SOON] ──────────────────────────
+  // ─── CPD Series 1 - Session 5 ────────────────────────────────────
   {
     id: 9,
     series: 1,
     session: 5,
-    title: "CPD Series 1 - Session 5",
-    topic: "Introduction to CPD Series 1 - Session 5",
-    description: "This session is coming soon. Stay tuned!",
-    objectives: ["Coming soon"],
-    lessons: ["Coming soon"],
-    lessonCount: 0,
+    title: "CPD Series 1 - Session 5 — Subject Integration( Languages, Science, Social Science, mathematics and Arts)",
+    topic: "Subject Integration( Languages, Science, Social Science, mathematics and Arts)",
+    formLink: "https://forms.gle/rSBAPriRzvGQr2pU7",
+    description: "This session focuses on integrating digital creativity across core academic subjects including Languages, Science, Social Science, Mathematics, and Fine Arts using Adobe Express.",
+    objectives: [
+      "Discover cross-curricular strategies for integrating Adobe Express into daily subject lesson plans.",
+      "Explore sample templates across science, math, social studies, and language arts.",
+      "Access session materials and submit project links via the official Google Form."
+    ],
+    lessons: [
+      "Cross-Curricular Digital Integration Strategies",
+      "Subject-Wise Creative Projects & Digital Portfolios",
+    ],
+    lessonCount: 2,
     videoCount: 0,
     quizCount: 0,
-    videos: [
+    videos: [],
+    resourceSections: [
       {
-        id: "v9-1",
-        title: "Introduction",
-        comingSoon: true,
-        duration: "0:00",
+        title: "Session Form & Submissions",
+        icon: "📋",
+        resources: [
+          {
+            title: "Official Session Submission Form",
+            type: "Google Form",
+            url: "https://forms.gle/rSBAPriRzvGQr2pU7",
+          }
+        ]
       }
     ],
     resources: [],
     quiz: []
   },
-  // ─── CPD Series 2 - Session 3 [COMING SOON] ──────────────────────────
+  // ─── CPD Series 2 - Session 3 ────────────────────────────────────
   {
     id: 6,
     series: 2,
     session: 3,
-    title: "CPD Series 2 - Session 3",
-    topic: "Introduction to CPD Series 2 - Session 3",
-    description: "This session is coming soon. Stay tuned!",
-    objectives: ["Coming soon"],
-    lessons: ["Coming soon"],
-    lessonCount: 0,
+    title: "CPD Series 2 - Session 3 — AI Foundations for Teachers — Responsible and Creative Use of Generative AI with Adobe Express",
+    topic: "AI Foundations for Teachers — Responsible and Creative Use of Generative AI with Adobe Express",
+    formLink: "https://forms.gle/FSsWjHX87VkrSdMV8",
+    description: "This session introduces educators to responsible, ethical, and creative applications of Generative AI in education using Adobe Express Firefly features.",
+    objectives: [
+      "Understand core AI concepts, ethical guidelines, and safe usage of AI in K-12 education.",
+      "Learn prompt engineering techniques to create visual learning resources in seconds.",
+      "Access session materials and submit project links via the official Google Form."
+    ],
+    lessons: [
+      "Responsible AI Framework for Educators",
+      "Generative AI Prompting Techniques in Adobe Express",
+    ],
+    lessonCount: 2,
     videoCount: 0,
     quizCount: 0,
-    videos: [
+    videos: [],
+    resourceSections: [
       {
-        id: "v6-1",
-        title: "Introduction",
-        comingSoon: true,
-        duration: "0:00",
+        title: "Session Form & Submissions",
+        icon: "📋",
+        resources: [
+          {
+            title: "Official Session Submission Form",
+            type: "Google Form",
+            url: "https://forms.gle/FSsWjHX87VkrSdMV8",
+          }
+        ]
       }
     ],
     resources: [],
     quiz: []
   },
-  // ─── CPD Series 2 - Session 4 [COMING SOON] ──────────────────────────
+  // ─── CPD Series 2 - Session 4 ────────────────────────────────────
   {
     id: 8,
     series: 2,
     session: 4,
-    title: "CPD Series 2 - Session 4",
-    topic: "Introduction to CPD Series 2 - Session 4",
-    description: "This session is coming soon. Stay tuned!",
-    objectives: ["Coming soon"],
-    lessons: ["Coming soon"],
-    lessonCount: 0,
+    title: "CPD Series 2 - Session 4 — Creating Real-World Learning Experiences through Creative Projects",
+    topic: "Creating Real-World Learning Experiences through Creative Projects",
+    formLink: "https://forms.gle/G8sQaQx1sMBz9TbS9",
+    description: "This session guides teachers in building real-world, project-based learning experiences that foster problem-solving, collaboration, and authentic student output.",
+    objectives: [
+      "Design real-world project prompts that connect classroom learning to community & global issues.",
+      "Guide students in publishing digital portfolios, web pages, and multimedia reports.",
+      "Access session materials and submit project links via the official Google Form."
+    ],
+    lessons: [
+      "Project-Based Learning (PBL) Design Principles",
+      "Authentic Student Output & Digital Portfolios",
+    ],
+    lessonCount: 2,
     videoCount: 0,
     quizCount: 0,
-    videos: [
+    videos: [],
+    resourceSections: [
       {
-        id: "v8-1",
-        title: "Introduction",
-        comingSoon: true,
-        duration: "0:00",
+        title: "Session Form & Submissions",
+        icon: "📋",
+        resources: [
+          {
+            title: "Official Session Submission Form",
+            type: "Google Form",
+            url: "https://forms.gle/G8sQaQx1sMBz9TbS9",
+          }
+        ]
       }
     ],
     resources: [],

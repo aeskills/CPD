@@ -212,7 +212,7 @@ export default function Sidebar({
                 Submit your activity & gallery project links using our official Google Form.
               </p>
               <a
-                href="https://forms.gle/airPprUG211Dy8TX6"
+                href={module.formLink || "https://forms.gle/airPprUG211Dy8TX6"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-primary btn-sm w-full"

@@ -63,30 +63,25 @@ export default function ModuleSelectionPage({
                   const complete = isModuleComplete(mod.id);
                   const active = selectedModule.id === mod.id;
                   const completion = getModuleCompletion(mod);
-                  const isComingSoon = mod.videos && mod.videos.every((v) => v.comingSoon);
 
                   return (
                     <div
                       key={mod.id}
-                      className={`module-item ${active ? "module-active" : ""} ${isComingSoon ? "coming-soon" : ""}`}
-                      onClick={() => {
-                        if (!isComingSoon) {
-                          handleModuleClick(mod);
-                        }
-                      }}
+                      className={`module-item ${active ? "module-active" : ""}`}
+                      onClick={() => handleModuleClick(mod)}
                       style={{ opacity: 0, animation: `fadeInUp 400ms ease ${mod.id * 80}ms forwards` }}
                     >
                       <div className="module-number">
                         {`S${mod.session}`}
                       </div>
                       <div className="module-info">
-                        <h3 title={isComingSoon ? "Coming Soon" : mod.topic}>
-                          {isComingSoon ? "Coming Soon" : mod.topic}
+                        <h3 title={mod.topic}>
+                          {mod.topic}
                         </h3>
                         <span className="module-status">
-                          {isComingSoon ? "Coming Soon" : `${mod.lessonCount || 0} Lessons`}
+                          {mod.lessonCount > 0 ? `${mod.lessonCount} Lessons` : "Resources & Form"}
                         </span>
-                        {active && !isComingSoon && (
+                        {active && (
                           <button
                             className="btn btn-primary btn-sm mobile-start-btn"
                             onClick={(e) => {
