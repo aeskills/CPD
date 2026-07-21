@@ -28,19 +28,9 @@ export default function App() {
     logoutUser,
   } = useProgress();
 
-  const [page, setPage] = useState(progress.isLoggedIn ? "modules" : "landing");
+  const [page, setPage] = useState("landing");
   const [pageData, setPageData] = useState({});
   const [transitioning, setTransitioning] = useState(false);
-
-  useEffect(() => {
-    if (progress.isLoggedIn && progress.schoolName) {
-      if (page === "landing") {
-        setPage("modules");
-      }
-    } else if (!progress.isLoggedIn) {
-      setPage("landing");
-    }
-  }, [progress.isLoggedIn, progress.schoolName]);
 
   const navigate = useCallback((target, data = {}) => {
     setTransitioning(true);
@@ -76,8 +66,6 @@ export default function App() {
               <LandingPage 
                 onNavigate={navigate} 
                 progress={progress}
-                loginUser={loginUser}
-                updateSchoolName={updateSchoolName}
               />
             )}
 

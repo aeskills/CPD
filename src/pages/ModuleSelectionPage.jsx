@@ -37,7 +37,14 @@ export default function ModuleSelectionPage({
 
   return (
     <div className="modules-page animate-fade-in">
-
+      <div className="top-bar-nav" style={{ marginBottom: "var(--space-2)", display: "flex", alignItems: "center" }}>
+        <button
+          onClick={() => onNavigate("landing")}
+          className="btn back-to-home-top"
+        >
+          ← Back to Home
+        </button>
+      </div>
 
       <div className="modules-header" style={{ marginTop: "0" }}>
         <h1>Course Dashboard</h1>
@@ -61,7 +68,7 @@ export default function ModuleSelectionPage({
                   return (
                     <div
                       key={mod.id}
-                      className={`module-item ${active ? "module-active" : ""} ${complete ? "module-complete" : ""} ${isComingSoon ? "coming-soon" : ""}`}
+                      className={`module-item ${active ? "module-active" : ""} ${isComingSoon ? "coming-soon" : ""}`}
                       onClick={() => {
                         if (!isComingSoon) {
                           handleModuleClick(mod);
@@ -70,29 +77,15 @@ export default function ModuleSelectionPage({
                       style={{ opacity: 0, animation: `fadeInUp 400ms ease ${mod.id * 80}ms forwards` }}
                     >
                       <div className="module-number">
-                        {complete ? "✓" : `S${mod.session}`}
+                        {`S${mod.session}`}
                       </div>
                       <div className="module-info">
                         <h3 title={isComingSoon ? "Coming Soon" : mod.topic}>
                           {isComingSoon ? "Coming Soon" : mod.topic}
                         </h3>
                         <span className="module-status">
-                          {isComingSoon
-                            ? "Coming Soon"
-                            : complete
-                              ? "Completed"
-                              : completion > 0
-                                ? `${completion}% complete`
-                                : "Not started"}
+                          {isComingSoon ? "Coming Soon" : `${mod.lessonCount || 0} Lessons`}
                         </span>
-                        {!complete && !isComingSoon && (
-                          <div className="module-progress-bar">
-                            <div
-                              className="module-progress-fill"
-                              style={{ width: `${completion}%` }}
-                            />
-                          </div>
-                        )}
                         {active && !isComingSoon && (
                           <button
                             className="btn btn-primary btn-sm mobile-start-btn"

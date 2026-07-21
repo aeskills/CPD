@@ -102,7 +102,7 @@ export default function SessionPage({
               <div className="video-info">
                 <div
                   className="flex items-center justify-between"
-                  style={{ marginBottom: "var(--space-4)" }}
+                  style={{ marginBottom: "var(--space-2)" }}
                 >
                   <div>
                     <h2>{currentVideo.title}</h2>
@@ -116,36 +116,6 @@ export default function SessionPage({
                   >
                     ☰
                   </button>
-                </div>
-
-                {/* Video progress indicator */}
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "var(--space-3)",
-                  }}
-                >
-                  <div
-                    className="module-progress-bar"
-                    style={{ flex: 1, height: "4px" }}
-                  >
-                    <div
-                      className="module-progress-fill"
-                      style={{
-                        width: `${progress.videoProgress[currentVideo.id] || 0}%`,
-                      }}
-                    />
-                  </div>
-                  <span
-                    style={{
-                      fontSize: "var(--text-xs)",
-                      color: "var(--text-muted)",
-                      minWidth: "32px",
-                    }}
-                  >
-                    {Math.round(progress.videoProgress[currentVideo.id] || 0)}%
-                  </span>
                 </div>
               </div>
             </>
