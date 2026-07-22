@@ -152,7 +152,8 @@ export default function Sidebar({
                       <div className="resource-icon">
                         {resource.type === "Comic Strip" ? "💬" :
                          resource.type === "Calendar" ? "📅" :
-                         resource.type === "Webpage" ? "🌐" : "📄"}
+                         resource.type === "Webpage" ? "🌐" :
+                         resource.type === "Presentation PPT" || resource.type === "PPT" ? "📊" : "📄"}
                       </div>
                       <div className="resource-info">
                         <h4>{resource.title}</h4>

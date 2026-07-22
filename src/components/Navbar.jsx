@@ -12,10 +12,6 @@ export default function Navbar({ onNavigate, currentPage, isLoggedIn, userName, 
         style={{ cursor: "pointer" }}
       >
         <div className="navbar-logo-icon">CPD</div>
-        <span className="navbar-logo-text">
-          <span className="logo-brand">Adobe Express</span>
-          <span className="logo-sub"> for Education</span>
-        </span>
       </div>
 
       {isLoggedIn && (

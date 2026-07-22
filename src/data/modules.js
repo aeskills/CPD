@@ -34,6 +34,12 @@ export const modules = [
     title: "CPD Series 1 - Session 1 — Implementation of NEP 2020 & SDGs in Schools through Digital Creativity",
     topic: "Implementation of NEP 2020 & SDGs in Schools through Digital Creativity",
     formLink: "https://forms.gle/RsZTh5oU9bHeaTBu7",
+    introVideo: {
+      youtubeId: "JKcnwdffjrM",
+      title: "Session Intro — NEP 2020 & SDGs in Practice",
+      duration: "Intro Video",
+      thumbnail: "https://img.youtube.com/vi/JKcnwdffjrM/hqdefault.jpg",
+    },
     description:
       `This session introduces educators to implementing NEP 2020 and the Sustainable Development Goals (SDGs) through digital creativity using Adobe Express. Teachers explore how technology integration, digital storytelling, and safe Generative AI can enhance classroom instruction while fostering creativity, critical thinking, and student engagement.
 
@@ -463,6 +469,12 @@ Learning Journal`,
     title: "CPD Series 1 - Session 2 — Classroom Planning & Organization Skills",
     topic: "Classroom Planning & Organization Skills",
     formLink: "https://forms.gle/P2A7SJwhYWLcjsJ48",
+    introVideo: {
+      youtubeId: "Zt6kle6Q5ms",
+      title: "Session Intro — Classroom Planning & Organization Skills",
+      duration: "Intro Video",
+      thumbnail: "https://img.youtube.com/vi/Zt6kle6Q5ms/hqdefault.jpg",
+    },
     description:
       `This session focuses on addressing real classroom challenges such as managing multiple subjects and grade levels, balancing curriculum coverage with meaningful learning, and handling high student-teacher ratios. Educators explore how effective classroom organization can reduce instructional stress, improve productivity, and support alignment with NEP 2020 and curriculum goals.
 
@@ -669,7 +681,14 @@ To support implementation, step-by-step tutorial videos and remixable templates 
     session: 2,
     title: "CPD Series 2 - Session 2 — Socio-Emotional Learning 2.0: Deepening Impact with Digital Creativity & AI",
     topic: "Socio-Emotional Learning 2.0: Deepening Impact with Digital Creativity & AI",
-    formLink: "https://forms.gle/7RteduKx7p4ncra98",
+    pptLink: "https://docs.google.com/presentation/d/1puBxFGkgAgRSjXmn_q-o-1U5zY2PuYYX/edit?usp=sharing",
+    pptTitle: "Session 2 Presentation Slides — Socio-Emotional Learning 2.0 (PPT)",
+    introVideo: {
+      youtubeId: "2iUApCAgrvg",
+      title: "Session Intro — Socio-Emotional Learning 2.0",
+      duration: "Intro Video",
+      thumbnail: "https://img.youtube.com/vi/2iUApCAgrvg/hqdefault.jpg",
+    },
     description:
       `This session focuses on integrating Social and Emotional Learning (SEL) into everyday classroom teaching using Adobe Express. Educators and students will foster self-awareness, self-management, social awareness, relationship skills, and responsible decision-making through creative, student-centered activities. The session demonstrates how digital creativity can strengthen emotional well-being while enhancing engagement across grade levels.
 
@@ -869,6 +888,12 @@ To support implementation, step-by-step tutorial videos and remixable templates 
     title: "CPD Series 1 - Session 3 — Building SocioEmotional Learning (SEL) Skills in the Classroom",
     topic: "Building SocioEmotional Learning (SEL) Skills in the Classroom",
     formLink: "https://forms.gle/VmP6cCHnyGp1MyxX6",
+    introVideo: {
+      youtubeId: "QgE6dME7IQU",
+      title: "Session Intro — Building SocioEmotional Learning (SEL) Skills",
+      duration: "Intro Video",
+      thumbnail: "https://img.youtube.com/vi/QgE6dME7IQU/hqdefault.jpg",
+    },
     description:
       `This session introduces educators to the core concepts of Social and Emotional Learning (SEL) and its five competencies—Self-Awareness, Self-Management, Social Awareness, Relationship Skills, and Responsible Decision-Making. Teachers explore how SEL supports student well-being, positive relationships, emotional resilience, and an inclusive classroom environment.
 

@@ -15,11 +15,9 @@ export default function LandingPage({ onNavigate }) {
           <div className="glass-banner-left">
             <div className="auth-logo-header">
               <div className="auth-logo-icon">CPD</div>
-              <span>Adobe Express for Education</span>
             </div>
 
             <div className="auth-details-middle">
-              <div className="auth-tagline">Designed by {courseInfo.organization}</div>
               <h1 className="auth-hero-title">
                 Elevate your <span className="text-highlight-red">teaching practice</span> with structured, certified learning
               </h1>
@@ -44,7 +42,6 @@ export default function LandingPage({ onNavigate }) {
             </div>
 
             <div className="auth-footer-text">
-              © 2026 Adobe Express for Education. All rights reserved.
             </div>
           </div>
 

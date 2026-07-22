@@ -1,11 +1,10 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useProgress } from "./hooks/useProgress";
 import { ToastProvider } from "./components/Toast";
 import Navbar from "./components/Navbar";
 import LandingPage from "./pages/LandingPage";
 import ModuleSelectionPage from "./pages/ModuleSelectionPage";
 import SessionPage from "./pages/SessionPage";
-import CertificatePage from "./pages/CertificatePage";
 
 export default function App() {
   const {
@@ -14,17 +13,12 @@ export default function App() {
     completeNoVideoModule,
     isVideoComplete,
     areAllVideosComplete,
-    getModuleVideoProgress,
     getModuleCompletion,
     submitQuiz,
     isModuleUnlocked,
     isModuleComplete,
     isAllComplete,
-    setUserName,
-    resetProgress,
     updateModuleLinks,
-    loginUser,
-    updateSchoolName,
     logoutUser,
   } = useProgress();
 
@@ -71,14 +65,7 @@ export default function App() {
 
             {page === "modules" && (
               <ModuleSelectionPage
-                onNavigate={(target, data) => {
-                  // Check if all modules complete → show certificate
-                  if (target === "session" && isAllComplete()) {
-                    navigate("certificate");
-                    return;
-                  }
-                  navigate(target, data);
-                }}
+                onNavigate={(target, data) => navigate(target, data)}
                 isModuleUnlocked={isModuleUnlocked}
                 isModuleComplete={isModuleComplete}
                 getModuleCompletion={getModuleCompletion}
@@ -99,14 +86,6 @@ export default function App() {
                 progress={progress}
                 addToast={addToast}
                 updateModuleLinks={updateModuleLinks}
-              />
-            )}
-
-            {page === "certificate" && (
-              <CertificatePage
-                userName={progress.userName}
-                setUserName={setUserName}
-                onNavigate={navigate}
               />
             )}
           </main>

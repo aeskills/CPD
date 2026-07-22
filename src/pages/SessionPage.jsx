@@ -38,7 +38,7 @@ export default function SessionPage({
       setCompleteToastShown(true);
       setTimeout(() => {
         addToast(
-          "🎓 All CPD Series & Sessions complete! Your certificate is ready!",
+          "🎉 Congratulations! You have completed all CPD Series & Sessions!",
           "success"
         );
       }, 1500);
