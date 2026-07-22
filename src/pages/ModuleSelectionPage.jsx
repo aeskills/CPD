@@ -566,6 +566,144 @@ export default function ModuleSelectionPage({
                     </div>
                   </div>
                 </div>
+              ) : selectedModule.pptLink ? (
+                /* Case 3: ONLY PPT Presentation link exists (no Intro Video) — Compact Horizontal Layout */
+                <div
+                  className="media-card-horizontal"
+                  style={{
+                    background: "#FFFFFF",
+                    borderRadius: "var(--radius-lg)",
+                    border: "1px solid var(--card-border)",
+                    padding: "var(--space-3)",
+                    boxShadow: "var(--shadow-sm)",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "var(--space-4)",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <div
+                    style={{
+                      borderRadius: "var(--radius-md)",
+                      background: "linear-gradient(135deg, #FFF5F5 0%, #FFEBEB 100%)",
+                      border: "1px solid rgba(235, 16, 0, 0.2)",
+                      width: "140px",
+                      height: "105px",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justify: "center",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#eb1000" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="2" y="3" width="20" height="14" rx="2" />
+                      <line x1="8" y1="21" x2="16" y2="21" />
+                      <line x1="12" y1="17" x2="12" y2="21" />
+                    </svg>
+                    <span style={{ fontSize: "10px", fontWeight: "800", color: "#eb1000", marginTop: "4px", letterSpacing: "0.05em" }}>
+                      PPT SLIDES
+                    </span>
+                  </div>
+
+                  <div
+                    style={{
+                      flex: 1,
+                      minWidth: "220px",
+                      display: "flex",
+                      flexDirection: "column",
+                      justify: "space-between",
+                      gap: "var(--space-2)",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justify: "space-between",
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontSize: "11px",
+                          fontWeight: "700",
+                          color: "var(--text-secondary)",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.05em",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "6px",
+                        }}
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <rect x="2" y="3" width="20" height="14" rx="2" />
+                          <line x1="8" y1="21" x2="16" y2="21" />
+                          <line x1="12" y1="17" x2="12" y2="21" />
+                        </svg>
+                        Session Presentation
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "10px",
+                          color: "#eb1000",
+                          background: "rgba(235, 16, 0, 0.08)",
+                          padding: "2px 8px",
+                          borderRadius: "10px",
+                          fontWeight: "700",
+                        }}
+                      >
+                        PPT Slides
+                      </span>
+                    </div>
+
+                    <div>
+                      <h4
+                        style={{
+                          fontSize: "13px",
+                          fontWeight: "700",
+                          color: "var(--text-primary)",
+                          lineHeight: 1.35,
+                          margin: 0,
+                        }}
+                      >
+                        {selectedModule.pptTitle || "Session Presentation Slides (PPT)"}
+                      </h4>
+                      <p
+                        style={{
+                          fontSize: "11px",
+                          color: "var(--text-muted)",
+                          margin: "3px 0 0 0",
+                          lineHeight: 1.4,
+                        }}
+                      >
+                        Explore or download the presentation slides for this CPD session.
+                      </p>
+                    </div>
+
+                    <div>
+                      <button
+                        className="btn btn-primary btn-sm"
+                        onClick={() => setActivePptModal({ title: selectedModule.pptTitle || "Session Presentation Slides (PPT)", link: selectedModule.pptLink })}
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "6px",
+                          fontWeight: "700",
+                          fontSize: "11px",
+                          borderRadius: "6px",
+                          padding: "6px 14px",
+                          background: "#eb1000",
+                          color: "#FFFFFF",
+                          border: "none",
+                          boxShadow: "0 2px 8px rgba(235, 16, 0, 0.25)",
+                          cursor: "pointer",
+                        }}
+                      >
+                        Preview & Download PPT ↗
+                      </button>
+                    </div>
+                  </div>
+                </div>
               ) : null}
             </div>
           )}

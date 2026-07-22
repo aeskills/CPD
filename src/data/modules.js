@@ -218,6 +218,8 @@ To support classroom implementation, tutorial videos and remixable Adobe Express
     title: "CPD Series 2 - Session 1 — Leveraging Creative Thinking and AI Enabled Pedagogies to Enhance Classroom Learning Outcomes",
     topic: "Leveraging Creative Thinking and AI Enabled Pedagogies to Enhance Classroom Learning Outcomes",
     formLink: "https://forms.gle/K5tvi1K7LYAYJjgMA",
+    pptLink: "https://docs.google.com/presentation/d/1puBxFGkgAgRSjXmn_q-o-1U5zY2PuYYX/edit?slide=id.p1#slide=id.p1",
+    pptTitle: "Session 1 Presentation Slides — Creative Thinking & AI Pedagogies (PPT)",
     description:
       `This session introduces educators to creative thinking, storytelling, experiential learning, and AI-enabled pedagogies to enhance student engagement and improve learning outcomes. Teachers will explore how Adobe Express can support critical and creative thinking and interactive classroom experiences through digital creativity and Generative AI.
 
@@ -681,8 +683,6 @@ To support implementation, step-by-step tutorial videos and remixable templates 
     session: 2,
     title: "CPD Series 2 - Session 2 — Socio-Emotional Learning 2.0: Deepening Impact with Digital Creativity & AI",
     topic: "Socio-Emotional Learning 2.0: Deepening Impact with Digital Creativity & AI",
-    pptLink: "https://docs.google.com/presentation/d/1puBxFGkgAgRSjXmn_q-o-1U5zY2PuYYX/edit?usp=sharing",
-    pptTitle: "Session 2 Presentation Slides — Socio-Emotional Learning 2.0 (PPT)",
     introVideo: {
       youtubeId: "2iUApCAgrvg",
       title: "Session Intro — Socio-Emotional Learning 2.0",
