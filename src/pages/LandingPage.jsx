@@ -9,7 +9,7 @@ export default function LandingPage({ onNavigate, currentState }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowInstruction(false);
-    }, 6000);
+    }, 15000);
     return () => clearTimeout(timer);
   }, []);
 
