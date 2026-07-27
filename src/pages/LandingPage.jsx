@@ -4,12 +4,12 @@ import teacherStudentImg from "../assets/teacher_student_creativity.png";
 import { getSchedulerUrl } from "../utils/stateConfig";
 
 export default function LandingPage({ onNavigate, currentState }) {
-  const [showInstruction, setShowInstruction] = useState(true);
+  const [showScheduleInstruction, setShowScheduleInstruction] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowInstruction(false);
-    }, 15000);
+      setShowScheduleInstruction(false);
+    }, 30000); // 30 seconds downtime
     return () => clearTimeout(timer);
   }, []);
 
@@ -21,44 +21,29 @@ export default function LandingPage({ onNavigate, currentState }) {
 
   return (
     <div className="landing-auth-container animate-fade-in">
-      {/* Floating Top Right Action Container */}
+      {/* Floating Top Right Action Container — Landing Page ONLY */}
       <div className="floating-top-right-actions">
-        {/* Schedule Live Session Button */}
-        <a
-          href={schedulerUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="schedule-live-btn"
-          title="Schedule Live Session"
-        >
-          <span className="schedule-btn-icon">📅</span>
-          <span className="schedule-btn-text">Schedule Live Session</span>
-        </a>
+        <div className="schedule-btn-wrapper" style={{ position: "relative" }}>
+          <a
+            href={schedulerUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="schedule-live-btn"
+            title="Schedule Live Session"
+          >
+            <span className="schedule-btn-icon">📅</span>
+            <span className="schedule-btn-text">Schedule Live Session</span>
+          </a>
 
-        {/* Get Your Credentials Button & 6-second auto-hiding instruction hint (Only for Chain & Retail) */}
-        {!currentState && (
-          <div className="credentials-wrapper">
-            <a
-              href="https://aeskills.github.io/AdobeExpressforEducation/CR"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="get-credentials-btn"
-              title="Get Your Credentials"
-            >
-              <span className="credentials-btn-icon">🔑</span>
-              <span className="credentials-btn-text">Get Your Credentials</span>
-            </a>
-
-            {showInstruction && (
-              <div className="credentials-instruction-popover popover-below">
-                <div className="instruction-arrow-up">↑</div>
-                <p className="instruction-text">
-                  If your Adobe Express for Education ID has been created by Adobe, click the link above to get your login credentials.
-                </p>
-              </div>
-            )}
-          </div>
-        )}
+          {/* 30-Second Auto-Disappearing Instruction Box */}
+          {showScheduleInstruction && (
+            <div className="schedule-instruction-popover theme-red-white">
+              <p className="instruction-text-red">
+                If you want to attend a Live CPD Session , Click on Schedule a live session to select your desired date.
+              </p>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Full-Width Glass Banner */}
@@ -66,11 +51,35 @@ export default function LandingPage({ onNavigate, currentState }) {
         <div className="glass-banner">
           {/* Left side of banner — Text & Information */}
           <div className="glass-banner-left">
+            {/* Header: CPD Logo */}
             <div className="auth-logo-header">
               <div className="auth-logo-icon">CPD</div>
             </div>
 
-            <div className="auth-details-middle">
+            {/* YouTube Channel Subscribe Box Below CPD Logo */}
+            <div className="youtube-subscribe-card animate-fade-in">
+              <div className="youtube-card-left">
+                <div className="youtube-thumbnail">
+                  <span className="youtube-play-icon">▶</span>
+                </div>
+                <div className="youtube-card-text">
+                  <h5 className="youtube-card-title">YouTube Channel</h5>
+                  <p className="youtube-card-desc">
+                    For More Tutorial and live session Please Subscribe to our channel.
+                  </p>
+                </div>
+              </div>
+              <a
+                href="https://www.youtube.com/@createjoyhappiness"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="youtube-subscribe-btn"
+              >
+                <span className="yt-icon">🔴</span> Subscribe
+              </a>
+            </div>
+
+            <div className="auth-details-middle" style={{ marginTop: "var(--space-4)" }}>
               <h1 className="auth-hero-title">
                 Elevate your <span className="text-highlight-red">teaching practice</span> with structured, certified learning
               </h1>
@@ -81,17 +90,30 @@ export default function LandingPage({ onNavigate, currentState }) {
                   <span className="auth-feature-icon">🛡️</span>
                   <div>
                     <h4 className="auth-feature-title">Official CPD Certification</h4>
-                    <p className="auth-feature-desc">Earn accredited certification automatically upon completing active sessions.</p>
+                    <p className="auth-feature-desc-large">
+                      Earn accredited certification automatically upon completing active sessions.
+                    </p>
                   </div>
                 </div>
                 <div className="auth-feature-item">
                   <span className="auth-feature-icon">⚡</span>
                   <div>
                     <h4 className="auth-feature-title">Interactive Digital Pedagogy</h4>
-                    <p className="auth-feature-desc">Practical methods to teach and mentor students in digital creativity</p>
+                    <p className="auth-feature-desc-large">
+                      Practical methods to teach and mentor students in digital creativity
+                    </p>
                   </div>
                 </div>
               </div>
+
+              {/* Red Notice Box Below Official CPD Certification Section */}
+              {!currentState && (
+                <div className="credentials-red-notice-banner animate-fade-in">
+                  <p className="credentials-notice-body">
+                    <strong>Important:</strong> To complete the CPD session, please log in using your school-issued Adobe Express for Education ID or the ID deployed by the Adobe team. Do not use your personal email address to access or complete the CPD session, as it may affect your participation records and certificate eligibility.
+                  </p>
+                </div>
+              )}
             </div>
 
             <div className="auth-footer-text">
@@ -112,38 +134,44 @@ export default function LandingPage({ onNavigate, currentState }) {
               <div className="floating-card">
                 <span className="floating-card-icon">🎨</span>
                 <div className="floating-card-text">
-                  <span className="floating-card-title">Adobe Express</span>
-                  <span className="floating-card-sub">Create & Design</span>
+                  <span className="floating-card-title-large">Adobe Express</span>
+                  <span className="floating-card-sub-large">Create & Design</span>
                 </div>
               </div>
               <div className="floating-card">
                 <span className="floating-card-icon">📜</span>
                 <div className="floating-card-text">
-                  <span className="floating-card-title">CPD Certificate</span>
-                  <span className="floating-card-sub">On Completion</span>
+                  <span className="floating-card-title-large">CPD Certificate</span>
+                  <span className="floating-card-sub-large">On Completion</span>
                 </div>
               </div>
             </div>
 
-            {/* Bottom Right CTA Button */}
-            <div style={{ marginTop: "var(--space-8)", alignSelf: "flex-end", display: "flex", justifyContent: "flex-end", width: "100%" }}>
-              <button
-                onClick={handleCTA}
-                className="btn btn-gold btn-lg"
-                style={{
-                  padding: "var(--space-3) var(--space-8)",
-                  fontSize: "var(--text-base)",
-                  fontWeight: "700",
-                  borderRadius: "var(--radius-full)",
-                  boxShadow: "0 8px 24px rgba(235, 16, 0, 0.3)",
-                  cursor: "pointer",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "var(--space-2)",
-                }}
-              >
-                Go to Course →
-              </button>
+            {/* Bottom CTA Container: Asynchronous Disclaimer Spanning Full Available Width + Right CTA Button */}
+            <div className="bottom-cta-container">
+              <div className="course-btn-disclaimer">
+                If you are unable to attend the live session, you can complete your CPD asynchronously by selecting the &quot;Go to Course&quot; option on the portal. You may complete any available CPD session from the course list. If you missed any previous CPD session, you can also complete it through the same option at your convenience.
+              </div>
+              <div className="bottom-cta-btn-wrapper">
+                <button
+                  onClick={handleCTA}
+                  className="btn btn-gold btn-lg"
+                  style={{
+                    padding: "var(--space-3) var(--space-8)",
+                    fontSize: "var(--text-base)",
+                    fontWeight: "700",
+                    borderRadius: "var(--radius-full)",
+                    boxShadow: "0 8px 24px rgba(235, 16, 0, 0.3)",
+                    cursor: "pointer",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "var(--space-2)",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  Go to Course →
+                </button>
+              </div>
             </div>
           </div>
         </div>

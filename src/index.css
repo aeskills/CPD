@@ -2126,7 +2126,7 @@ ul, ol {
   box-shadow: none;
   border-radius: 0;
   overflow: hidden;
-  padding: var(--space-10) var(--space-16);
+  padding: var(--space-6) var(--space-16);
   position: relative;
   box-sizing: border-box;
 }
@@ -2155,8 +2155,8 @@ ul, ol {
 
 .illustration-wrapper {
   position: relative;
-  width: 360px;
-  height: 360px;
+  width: 420px;
+  height: 420px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2166,8 +2166,8 @@ ul, ol {
 
 .illustration-accent-circle {
   position: absolute;
-  width: 380px;
-  height: 380px;
+  width: 440px;
+  height: 440px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(235, 16, 0, 0.1) 0%, transparent 70%);
   border: 2px dashed rgba(235, 16, 0, 0.2);
@@ -2176,12 +2176,12 @@ ul, ol {
 }
 
 .illustration-img {
-  width: 320px;
-  height: 320px;
+  width: 380px;
+  height: 380px;
   border-radius: 50%;
   object-fit: cover;
   z-index: 2;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
 }
 
 .floating-cards-row {
@@ -2189,7 +2189,9 @@ ul, ol {
   gap: var(--space-4);
   z-index: 3;
   width: 100%;
-  justify-content: center;
+  max-width: 440px;
+  justify-content: space-between;
+  margin: 0 auto;
 }
 
 .floating-card {
@@ -2246,11 +2248,33 @@ ul, ol {
 .auth-logo-header {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-4);
   font-weight: 800;
   font-size: var(--text-lg);
   color: var(--text-primary);
   margin-bottom: var(--space-6);
+  width: 100%;
+}
+
+.youtube-header-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF8F8 100%);
+  border: 1.5px solid rgba(239, 68, 68, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 8px 14px;
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.08);
+  flex: 1;
+  max-width: 580px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.youtube-header-banner:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.45);
 }
 
 .auth-logo-icon {
@@ -2301,7 +2325,239 @@ ul, ol {
 .auth-feature-icon { font-size: var(--text-2xl); flex-shrink: 0; margin-top: 2px; }
 .auth-feature-title { font-weight: 700; font-size: var(--text-sm); color: var(--text-primary); margin-bottom: var(--space-1); }
 .auth-feature-desc { font-size: var(--text-xs); color: var(--text-muted); line-height: 1.5; }
-.auth-footer-text { font-size: var(--text-xs); color: var(--text-muted); letter-spacing: 0.02em; margin-top: var(--space-6); }
+.auth-feature-desc-large { font-size: 13.5px; font-weight: 500; color: #475569; line-height: 1.5; }
+
+.floating-card-title-large { font-size: 13.5px; font-weight: 800; color: #0F172A; line-height: 1.25; }
+.floating-card-sub-large { font-size: 11.5px; font-weight: 600; color: #64748B; margin-top: 2px; }
+
+/* Red Notice Banner Below Official CPD Certification Section — Image 3 */
+.credentials-red-notice-banner {
+  margin-top: var(--space-5);
+  background: linear-gradient(135deg, #FFF5F5 0%, #FFEAEA 100%);
+  border: 1.5px solid rgba(235, 16, 0, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  box-shadow: 0 4px 16px rgba(235, 16, 0, 0.06);
+  max-width: 680px;
+}
+
+.credentials-notice-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.credentials-notice-badge-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.credentials-notice-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.credentials-notice-body {
+  font-size: 13px;
+  font-weight: 600;
+  color: #991B1B;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.credentials-notice-link-btn {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: 6px 16px;
+  background: linear-gradient(135deg, #FF1E00 0%, #B80800 100%);
+  color: #FFFFFF !important;
+  font-weight: 800;
+  font-size: 11.5px;
+  border-radius: var(--radius-full);
+  text-decoration: none !important;
+  box-shadow: 0 4px 12px rgba(235, 16, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.credentials-notice-link-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 18px rgba(235, 16, 0, 0.45);
+}
+
+/* YouTube Channel Subscribe Card */
+.youtube-subscribe-card {
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-4);
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF8F8 100%);
+  border: 1.5px solid rgba(239, 68, 68, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.08);
+  max-width: 650px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.youtube-subscribe-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.45);
+}
+
+.youtube-card-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.youtube-thumbnail {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(255, 0, 0, 0.35);
+}
+
+.youtube-play-icon {
+  color: #FFFFFF;
+  font-size: 20px;
+  margin-left: 2px;
+  line-height: 1;
+}
+
+.youtube-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.youtube-card-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0;
+}
+
+.youtube-card-desc {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #475569;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.youtube-subscribe-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  background: linear-gradient(135deg, #FF0000 0%, #C40000 100%);
+  color: #FFFFFF !important;
+  font-weight: 800;
+  font-size: 12px;
+  border-radius: var(--radius-full);
+  text-decoration: none !important;
+  box-shadow: 0 4px 14px rgba(255, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.youtube-subscribe-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(255, 0, 0, 0.45);
+  background: linear-gradient(135deg, #FF1A1A 0%, #D60000 100%);
+}
+
+.schedule-instruction-popover {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 290px;
+  background: linear-gradient(135deg, #FFF5F5 0%, #FFEAEA 100%);
+  color: #991B1B;
+  padding: 12px 16px;
+  border-radius: var(--radius-lg);
+  border: 1.5px solid rgba(235, 16, 0, 0.25);
+  box-shadow: 0 8px 24px rgba(235, 16, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.45;
+  z-index: 1005;
+  pointer-events: none;
+  animation: popoverFadeIn 0.3s ease-out;
+}
+
+.schedule-instruction-popover::before {
+  content: '';
+  position: absolute;
+  top: -7.5px;
+  right: 32px;
+  width: 12px;
+  height: 12px;
+  background: #FFF7F7;
+  border-top: 1.5px solid rgba(235, 16, 0, 0.25);
+  border-left: 1.5px solid rgba(235, 16, 0, 0.25);
+  transform: rotate(45deg);
+  z-index: 2;
+}
+
+.instruction-text-red {
+  margin: 0;
+  color: #991B1B;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.45;
+}
+
+/* Bottom CTA Container: Asynchronous Disclaimer Spanning Full Top Width + Right CTA Button */
+.bottom-cta-container {
+  margin-top: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 3;
+}
+
+.bottom-cta-btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.course-btn-disclaimer {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #991B1B;
+  background: linear-gradient(135deg, #FFF5F5 0%, #FFEAEA 100%);
+  border: 1.5px solid rgba(235, 16, 0, 0.25);
+  padding: 14px 18px;
+  border-radius: var(--radius-lg);
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  white-space: normal;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 4px 16px rgba(235, 16, 0, 0.06);
+}
+
+.auth-footer-text { font-size: var(--text-xs); color: var(--text-muted); letter-spacing: 0.02em; margin-top: var(--space-4); }
 
 /* Auth card overrides */
 .auth-form-side .course-card {
@@ -2329,9 +2585,9 @@ ul, ol {
   .glass-banner { padding: var(--space-5) var(--space-4); border-radius: 20px; }
   .auth-hero-title { font-size: 1.85rem; margin-bottom: var(--space-4); }
   .auth-hero-desc { font-size: var(--text-xs); margin-bottom: var(--space-6); }
-  .illustration-wrapper { width: 240px; height: 240px; }
-  .illustration-accent-circle { width: 260px; height: 260px; }
-  .illustration-img { width: 210px; height: 210px; }
+  .illustration-wrapper { width: 280px; height: 280px; }
+  .illustration-accent-circle { width: 300px; height: 300px; }
+  .illustration-img { width: 250px; height: 250px; }
   .floating-cards-row { gap: var(--space-3); flex-wrap: wrap; }
   .floating-card { padding: var(--space-2) var(--space-3); border-radius: 12px; }
   .floating-card-icon { font-size: 1.2rem; }
@@ -2339,21 +2595,34 @@ ul, ol {
   .floating-card-sub { font-size: 9px; }
 
   .floating-top-right-actions {
-    position: relative;
-    top: auto;
-    right: auto;
-    width: 100%;
-    margin-bottom: var(--space-4);
-    align-items: flex-end;
+    position: absolute !important;
+    top: 16px !important;
+    right: 16px !important;
+    width: auto !important;
+    margin-bottom: 0 !important;
+    align-items: flex-end !important;
   }
-  .schedule-live-btn { padding: 6px 14px; font-size: 11px; }
-  .get-credentials-btn { padding: 5px 12px; font-size: 10.5px; }
-  .credentials-instruction-popover {
-    width: 250px;
-    max-width: calc(100vw - 32px);
-    right: 0;
-    padding: 8px 12px;
-    font-size: 10.5px;
+  .schedule-live-btn { padding: 6px 14px !important; font-size: 11px !important; width: auto !important; display: inline-flex !important; }
+  .schedule-instruction-popover {
+    width: 220px !important;
+    max-width: calc(100vw - 32px) !important;
+    right: 0 !important;
+    padding: 8px 12px !important;
+    font-size: 10.5px !important;
+  }
+
+  .bottom-cta-row {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+    max-width: 100%;
+  }
+  .course-btn-disclaimer {
+    white-space: normal;
+    text-align: center;
+    max-width: 100%;
   }
 }
 
@@ -2363,31 +2632,20 @@ ul, ol {
   .auth-logo-header { font-size: var(--text-base); margin-bottom: var(--space-4); }
   .auth-hero-title { font-size: 1.5rem; line-height: 1.3; }
   .auth-hero-desc { font-size: 12px; line-height: 1.5; }
-  .illustration-wrapper { width: 180px; height: 180px; }
-  .illustration-accent-circle { width: 196px; height: 196px; }
-  .illustration-img { width: 160px; height: 160px; }
+  .illustration-wrapper { width: 220px; height: 220px; }
+  .illustration-accent-circle { width: 236px; height: 236px; }
+  .illustration-img { width: 190px; height: 190px; }
   .floating-cards-row { flex-direction: column; align-items: stretch; max-width: 220px; margin: 0 auto; }
   .floating-card { justify-content: center; }
   .auth-features-grid { gap: var(--space-4); }
   .auth-form-side { padding: var(--space-6) var(--space-4); }
 
   .floating-top-right-actions {
-    align-items: stretch;
-  }
-  .credentials-wrapper {
-    align-items: stretch;
-    width: 100%;
-  }
-  .schedule-live-btn, .get-credentials-btn {
-    justify-content: center;
-    width: 100%;
-    text-align: center;
-  }
-  .credentials-instruction-popover {
-    width: 100%;
-    max-width: 100%;
-    left: 0;
-    right: 0;
+    position: absolute !important;
+    top: 14px !important;
+    right: 14px !important;
+    width: auto !important;
+    align-items: flex-end !important;
   }
 }
 
