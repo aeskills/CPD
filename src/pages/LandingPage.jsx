@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { courseInfo } from "../data/modules";
 import teacherStudentImg from "../assets/teacher_student_creativity.png";
-import { getSchedulerUrl } from "../utils/stateConfig";
+import { getSchedulerUrl, getStateConfig } from "../utils/stateConfig";
 
 export default function LandingPage({ onNavigate, currentState }) {
   const [showScheduleInstruction, setShowScheduleInstruction] = useState(true);
@@ -18,6 +18,7 @@ export default function LandingPage({ onNavigate, currentState }) {
   };
 
   const schedulerUrl = getSchedulerUrl(currentState);
+  const stateConfig = getStateConfig(currentState);
 
   return (
     <div className="landing-auth-container animate-fade-in">
@@ -81,7 +82,7 @@ export default function LandingPage({ onNavigate, currentState }) {
 
             <div className="auth-details-middle" style={{ marginTop: "var(--space-4)" }}>
               <h1 className="auth-hero-title">
-                Elevate your <span className="text-highlight-red">teaching practice</span> with structured, certified learning
+                Elevate your <span className="text-highlight-red">{stateConfig.heroTitleHighlight || "teaching practice"}</span> with structured, certified learning
               </h1>
               <p className="auth-hero-desc">{courseInfo.overview}</p>
 
