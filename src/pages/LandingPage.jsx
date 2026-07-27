@@ -107,13 +107,11 @@ export default function LandingPage({ onNavigate, currentState }) {
               </div>
 
               {/* Red Notice Box Below Official CPD Certification Section */}
-              {!currentState && (
-                <div className="credentials-red-notice-banner animate-fade-in">
-                  <p className="credentials-notice-body">
-                    <strong>Important:</strong> To complete the CPD session, please log in using your school-issued Adobe Express for Education ID or the ID deployed by the Adobe team. Do not use your personal email address to access or complete the CPD session, as it may affect your participation records and certificate eligibility.
-                  </p>
-                </div>
-              )}
+              <div className="credentials-red-notice-banner animate-fade-in">
+                <p className="credentials-notice-body">
+                  <strong>Important:</strong> To complete the CPD session, please log in using your school-issued Adobe Express for Education ID or the ID deployed by the Adobe team. Do not use your personal email address to access or complete the CPD session, as it may affect your participation records and certificate eligibility.
+                </p>
+              </div>
             </div>
 
             <div className="auth-footer-text">
