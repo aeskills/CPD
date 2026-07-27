@@ -2,10 +2,15 @@ import { useState, useCallback, useEffect } from "react";
 import { modules } from "../data/modules";
 
 const STORAGE_PREFIX = "cpd_progress_";
-const ACTIVE_USER_KEY = "cpd_active_user";
 
-function getUserStorageKey(email) {
-  return STORAGE_PREFIX + (email || "anonymous").toLowerCase().trim();
+function getUserStorageKey(email, stateId = "") {
+  const stateTag = stateId ? stateId.toLowerCase().trim() : "default";
+  return `${STORAGE_PREFIX}${stateTag}_${(email || "anonymous").toLowerCase().trim()}`;
+}
+
+function getActiveUserKey(stateId = "") {
+  const stateTag = stateId ? stateId.toLowerCase().trim() : "default";
+  return `cpd_active_user_${stateTag}`;
 }
 
 function getDefaultProgress() {
@@ -25,35 +30,18 @@ function getDefaultProgress() {
   };
 }
 
-function loadProgress() {
+function loadProgress(stateId = "") {
   try {
-    // Check if there's an active user session
-    const activeEmail = localStorage.getItem(ACTIVE_USER_KEY);
+    const activeEmailKey = getActiveUserKey(stateId);
+    const activeEmail = localStorage.getItem(activeEmailKey);
     if (activeEmail) {
-      const key = getUserStorageKey(activeEmail);
+      const key = getUserStorageKey(activeEmail, stateId);
       const stored = localStorage.getItem(key);
       if (stored) {
         const parsed = JSON.parse(stored);
-        // Ensure isLoggedIn is true for active sessions
         parsed.isLoggedIn = true;
         return parsed;
       }
-    }
-    
-    // Migrate old single-key data if it exists (one-time migration)
-    const oldData = localStorage.getItem("cpd_progress");
-    if (oldData) {
-      const parsed = JSON.parse(oldData);
-      if (parsed.email && parsed.isLoggedIn) {
-        // Save under new user-specific key
-        const key = getUserStorageKey(parsed.email);
-        localStorage.setItem(key, JSON.stringify(parsed));
-        localStorage.setItem(ACTIVE_USER_KEY, parsed.email);
-        localStorage.removeItem("cpd_progress");
-        return parsed;
-      }
-      // Old data without email — just remove it
-      localStorage.removeItem("cpd_progress");
     }
   } catch (e) {
     console.warn("Failed to load progress:", e);
@@ -61,24 +49,30 @@ function loadProgress() {
   return getDefaultProgress();
 }
 
-function saveProgress(progress) {
+function saveProgress(progress, stateId = "") {
   try {
     if (progress.isLoggedIn && progress.email) {
-      const key = getUserStorageKey(progress.email);
+      const key = getUserStorageKey(progress.email, stateId);
+      const activeEmailKey = getActiveUserKey(stateId);
       localStorage.setItem(key, JSON.stringify(progress));
-      localStorage.setItem(ACTIVE_USER_KEY, progress.email);
+      localStorage.setItem(activeEmailKey, progress.email);
     }
   } catch (e) {
     console.warn("Failed to save progress:", e);
   }
 }
 
-export function useProgress() {
-  const [progress, setProgress] = useState(loadProgress);
+export function useProgress(stateId = "") {
+  const [progress, setProgress] = useState(() => loadProgress(stateId));
+
+  // Reload progress whenever stateId changes
+  useEffect(() => {
+    setProgress(loadProgress(stateId));
+  }, [stateId]);
 
   useEffect(() => {
-    saveProgress(progress);
-  }, [progress]);
+    saveProgress(progress, stateId);
+  }, [progress, stateId]);
 
   const updateVideoProgress = useCallback((videoId, percentage) => {
     setProgress((prev) => {
@@ -90,7 +84,6 @@ export function useProgress() {
         [videoId]: Math.min(100, Math.round(percentage)),
       };
 
-      // Automatically mark module as complete if all playable videos are done
       let newCompletedModules = [...prev.completedModules];
       const targetModule = modules.find((m) => m.videos.some((v) => v.id === videoId));
       if (targetModule) {
@@ -165,7 +158,6 @@ export function useProgress() {
 
   const submitQuiz = useCallback(
     (moduleId, score, total) => {
-      // Quiz is now disabled / coming soon. Keep as no-op.
       return false;
     },
     []
@@ -173,7 +165,7 @@ export function useProgress() {
 
   const isModuleUnlocked = useCallback(
     (moduleId) => {
-      return true; // All modules are free and unlocked
+      return true;
     },
     []
   );
@@ -186,7 +178,6 @@ export function useProgress() {
   );
 
   const isAllComplete = useCallback(() => {
-    // Only require completion for active modules that have playable videos
     const activeModules = modules.filter((m) => 
       m.videos && m.videos.some((v) => !v.comingSoon)
     );
@@ -202,8 +193,8 @@ export function useProgress() {
   const resetProgress = useCallback(() => {
     const fresh = getDefaultProgress();
     setProgress(fresh);
-    localStorage.removeItem(ACTIVE_USER_KEY);
-  }, []);
+    localStorage.removeItem(getActiveUserKey(stateId));
+  }, [stateId]);
 
   const updateModuleLinks = useCallback((moduleId, teacherLink, galleryLink) => {
     setProgress((prev) => {
@@ -221,10 +212,9 @@ export function useProgress() {
   const loginUser = useCallback((user) => {
     const email = (user.email || "").toLowerCase().trim();
     
-    // Load this specific user's saved progress (if they logged in before)
     let existingProgress = getDefaultProgress();
     try {
-      const key = getUserStorageKey(email);
+      const key = getUserStorageKey(email, stateId);
       const stored = localStorage.getItem(key);
       if (stored) {
         existingProgress = JSON.parse(stored);
@@ -233,7 +223,6 @@ export function useProgress() {
       console.warn("Failed to load user progress:", e);
     }
     
-    // Merge user identity with their saved progress
     const merged = {
       ...existingProgress,
       isLoggedIn: true,
@@ -246,8 +235,8 @@ export function useProgress() {
     };
     
     setProgress(merged);
-    localStorage.setItem(ACTIVE_USER_KEY, email);
-  }, []);
+    localStorage.setItem(getActiveUserKey(stateId), email);
+  }, [stateId]);
 
   const updateSchoolName = useCallback((schoolName) => {
     setProgress((prev) => ({
@@ -257,11 +246,9 @@ export function useProgress() {
   }, []);
 
   const logoutUser = useCallback(() => {
-    // Clear the active session marker
-    localStorage.removeItem(ACTIVE_USER_KEY);
-    // Reset to a completely fresh state
+    localStorage.removeItem(getActiveUserKey(stateId));
     setProgress(getDefaultProgress());
-  }, []);
+  }, [stateId]);
 
   return {
     progress,

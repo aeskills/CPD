@@ -1,13 +1,66 @@
+import { useState, useEffect } from "react";
 import { courseInfo } from "../data/modules";
 import teacherStudentImg from "../assets/teacher_student_creativity.png";
+import { getSchedulerUrl } from "../utils/stateConfig";
 
-export default function LandingPage({ onNavigate }) {
+export default function LandingPage({ onNavigate, currentState }) {
+  const [showInstruction, setShowInstruction] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowInstruction(false);
+    }, 6000);
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleCTA = () => {
     onNavigate("modules");
   };
 
+  const schedulerUrl = getSchedulerUrl(currentState);
+
   return (
     <div className="landing-auth-container animate-fade-in">
+      {/* Floating Top Right Action Container */}
+      <div className="floating-top-right-actions">
+        {/* Schedule Live Session Button */}
+        <a
+          href={schedulerUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="schedule-live-btn"
+          title="Schedule Live Session"
+        >
+          <span className="schedule-btn-icon">📅</span>
+          <span className="schedule-btn-text">Schedule Live Session</span>
+        </a>
+
+        {/* Get Your Credentials Button & 6-second auto-hiding instruction hint (Only for Chain & Retail) */}
+        {!currentState && (
+          <div className="credentials-wrapper">
+            <a
+              href="https://aeskills.github.io/AdobeExpressforEducation/CR"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="get-credentials-btn"
+              title="Get Your Credentials"
+            >
+              <span className="credentials-btn-icon">🔑</span>
+              <span className="credentials-btn-text">Get Your Credentials</span>
+            </a>
+
+            {showInstruction && (
+              <div className="credentials-instruction-popover popover-below">
+                <div className="instruction-arrow-up">↑</div>
+                <p className="instruction-text">
+                  If your Adobe Express for Education ID has been created by Adobe, click the link above to get your login credentials.
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
       {/* Full-Width Glass Banner */}
       <div className="auth-details-side">
         <div className="glass-banner">
@@ -86,10 +139,10 @@ export default function LandingPage({ onNavigate }) {
                   cursor: "pointer",
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "var(--space-2)"
+                  gap: "var(--space-2)",
                 }}
               >
-                Go to Sessions →
+                Go to Course →
               </button>
             </div>
           </div>

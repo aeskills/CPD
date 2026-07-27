@@ -119,12 +119,31 @@ export default function ModuleSelectionPage({
                 fontSize: "11px",
                 fontWeight: "600",
                 color: "var(--text-primary)",
-                margin: 0,
+                margin: "0 0 6px 0",
                 lineHeight: 1.35,
               }}
             >
               In order to receive a certificate, you need to submit the Activity Link via the submission form inside the session.
             </p>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                gap: "5px",
+                background: "rgba(235, 16, 0, 0.06)",
+                border: "1px dashed rgba(235, 16, 0, 0.3)",
+                borderRadius: "var(--radius-sm)",
+                padding: "6px 8px",
+                fontSize: "10.5px",
+                fontWeight: "700",
+                color: "#c00000",
+                lineHeight: 1.35,
+              }}
+            >
+              <span style={{ fontSize: "12px", color: "#eb1000", lineHeight: 1 }}>•</span>
+              <span>Please note that certificates will be released after 45 days of your submission.</span>
+            </div>
           </div>
         </div>
       </div>
