@@ -81,25 +81,8 @@ export default function ModuleSelectionPage({
           <p style={{ textAlign: "center", margin: 0 }}>Select a CPD Session to begin your learning journey</p>
         </div>
 
-        {/* Right Corner Certification Notice Card — Perfectly aligned with 340px right panel */}
-        <div
-          className="certificate-notice-card animate-fade-in"
-          style={{
-            position: "absolute",
-            right: 0,
-            top: "50%",
-            transform: "translateY(-50%)",
-            background: "linear-gradient(135deg, #FFF5F5 0%, #FFFFFF 100%)",
-            border: "1.5px solid rgba(235, 16, 0, 0.25)",
-            borderRadius: "var(--radius-lg)",
-            padding: "var(--space-3) var(--space-4)",
-            width: "340px",
-            maxWidth: "100%",
-            boxShadow: "0 4px 16px rgba(235, 16, 0, 0.08)",
-            boxSizing: "border-box",
-            zIndex: 2,
-          }}
-        >
+        {/* Right Corner Certification Notice Card */}
+        <div className="certificate-notice-card animate-fade-in">
           <div style={{ width: "100%" }}>
             <span
               style={{

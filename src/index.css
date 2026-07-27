@@ -2321,6 +2321,7 @@ ul, ol {
   .auth-form-side { flex: 1 0 auto; width: 100%; padding: var(--space-8) var(--space-6); min-height: auto; border-left: none; border-top: 1px solid #e4e8eb; }
   .auth-hero-title { font-size: 2.2rem; }
   .auth-features-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+  .floating-top-right-actions { top: 20px; right: 24px; }
 }
 
 @media (max-width: 768px) {
@@ -2336,6 +2337,24 @@ ul, ol {
   .floating-card-icon { font-size: 1.2rem; }
   .floating-card-title { font-size: 11px; }
   .floating-card-sub { font-size: 9px; }
+
+  .floating-top-right-actions {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    margin-bottom: var(--space-4);
+    align-items: flex-end;
+  }
+  .schedule-live-btn { padding: 6px 14px; font-size: 11px; }
+  .get-credentials-btn { padding: 5px 12px; font-size: 10.5px; }
+  .credentials-instruction-popover {
+    width: 250px;
+    max-width: calc(100vw - 32px);
+    right: 0;
+    padding: 8px 12px;
+    font-size: 10.5px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2351,10 +2370,46 @@ ul, ol {
   .floating-card { justify-content: center; }
   .auth-features-grid { gap: var(--space-4); }
   .auth-form-side { padding: var(--space-6) var(--space-4); }
+
+  .floating-top-right-actions {
+    align-items: stretch;
+  }
+  .credentials-wrapper {
+    align-items: stretch;
+    width: 100%;
+  }
+  .schedule-live-btn, .get-credentials-btn {
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+  .credentials-instruction-popover {
+    width: 100%;
+    max-width: 100%;
+    left: 0;
+    right: 0;
+  }
 }
 
 .mobile-start-btn {
   display: none;
+}
+
+/* Certificate Notice Card */
+.certificate-notice-card {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(135deg, #FFF5F5 0%, #FFFFFF 100%);
+  border: 1.5px solid rgba(235, 16, 0, 0.25);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
+  width: 340px;
+  max-width: 100%;
+  box-shadow: 0 4px 16px rgba(235, 16, 0, 0.08);
+  box-sizing: border-box;
+  z-index: 2;
 }
 
 @media (max-width: 1024px) {
@@ -2363,5 +2418,21 @@ ul, ol {
     margin-top: var(--space-3);
     width: 100%;
     animation: fadeIn 300ms ease;
+  }
+
+  .dashboard-header-container {
+    flex-direction: column !important;
+    min-height: auto !important;
+    gap: var(--space-3) !important;
+  }
+
+  .certificate-notice-card {
+    position: relative !important;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: var(--space-3) !important;
   }
 }
