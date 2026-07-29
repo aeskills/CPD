@@ -114,23 +114,30 @@ export const STATE_CONFIGS = {
 };
 
 /**
+ * Helper to resolve valid state ID from a raw string/slug.
+ * Performs strict matching against known states and aliases to avoid invalid route values (like 'admin').
+ */
+function resolveStateId(slug) {
+  if (!slug) return null;
+  const key = slug.toLowerCase().trim();
+  if (STATE_CONFIGS[key]) return STATE_CONFIGS[key].id || key;
+  const found = STATES.find(
+    (s) => s.id === key || s.code.toLowerCase() === key
+  );
+  if (found) return found.id;
+  return null;
+}
+
+/**
  * Returns isolated state configuration object
  */
 export function getStateConfig(stateId) {
   if (!stateId) return STATE_CONFIGS.default;
   const key = stateId.toLowerCase().trim();
-  if (STATE_CONFIGS[key]) return STATE_CONFIGS[key];
+  const resolvedId = resolveStateId(key);
+  if (resolvedId && STATE_CONFIGS[resolvedId]) return STATE_CONFIGS[resolvedId];
   
-  const code = key.toUpperCase();
-  return {
-    id: key,
-    code: code,
-    name: code,
-    schedulerUrl: `${BASE_SCHEDULER_URL}/${code}`,
-    cpdUrl: `${BASE_CPD_URL}/${key}`,
-    title: `CPD Foundation Program — ${code}`,
-    heroTitleHighlight: `teaching practice in ${code}`,
-  };
+  return STATE_CONFIGS.default;
 }
 
 /**
@@ -144,12 +151,9 @@ export function getStateFromPath(
   // 1. Check GitHub Pages SPA search redirect: ?/up or ?/goa or ?/delhi
   if (search && search.startsWith("?/")) {
     const rawPath = search.slice(2).split("&")[0].replace(/\/$/, "");
-    const firstSeg = rawPath.split("/")[0].toLowerCase().trim();
-    if (firstSeg) {
-      const found = STATES.find((s) => s.id === firstSeg || s.code.toLowerCase() === firstSeg);
-      if (found) return found.id;
-      if (firstSeg.length <= 15) return firstSeg;
-    }
+    const firstSeg = rawPath.split("/")[0];
+    const resolved = resolveStateId(firstSeg);
+    if (resolved) return resolved;
   }
 
   // 2. Check standard search params: ?state=up
@@ -157,10 +161,8 @@ export function getStateFromPath(
     const searchParams = new URLSearchParams(search);
     const stateQuery = searchParams.get("state");
     if (stateQuery) {
-      const queryLower = stateQuery.toLowerCase().trim();
-      const found = STATES.find((s) => s.id === queryLower || s.code.toLowerCase() === queryLower);
-      if (found) return found.id;
-      return queryLower;
+      const resolved = resolveStateId(stateQuery);
+      if (resolved) return resolved;
     }
   } catch (e) {
     console.warn("Failed parsing query string", e);
@@ -170,11 +172,8 @@ export function getStateFromPath(
   if (hash) {
     const hashPath = hash.replace(/^#\/?/, "").toLowerCase().trim();
     const firstSegment = hashPath.split("/")[0];
-    if (firstSegment && firstSegment !== "landing" && firstSegment !== "modules" && firstSegment !== "session") {
-      const found = STATES.find((s) => s.id === firstSegment || s.code.toLowerCase() === firstSegment);
-      if (found) return found.id;
-      if (firstSegment.length <= 15) return firstSegment;
-    }
+    const resolved = resolveStateId(firstSegment);
+    if (resolved) return resolved;
   }
 
   // 4. Check pathname: /CPD/up or /up or /CPD/up/
@@ -186,15 +185,14 @@ export function getStateFromPath(
     const cpdIdx = segments.findIndex((s) => s.toLowerCase() === "cpd");
     let candidate = "";
     if (cpdIdx !== -1 && segments.length > cpdIdx + 1) {
-      candidate = segments[cpdIdx + 1].toLowerCase().trim();
+      candidate = segments[cpdIdx + 1];
     } else if (segments.length > 0) {
-      candidate = segments[segments.length - 1].toLowerCase().trim();
+      candidate = segments[segments.length - 1];
     }
 
-    if (candidate && candidate !== "cpd" && candidate !== "index.html") {
-      const found = STATES.find((s) => s.id === candidate || s.code.toLowerCase() === candidate);
-      if (found) return found.id;
-      return candidate;
+    if (candidate) {
+      const resolved = resolveStateId(candidate);
+      if (resolved) return resolved;
     }
   }
 
