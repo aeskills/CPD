@@ -33,7 +33,7 @@ export const modules = [
     session: 1,
     title: "CPD Series 1 - Session 1 — Implementation of NEP 2020 & SDGs in Schools through Digital Creativity",
     topic: "Implementation of NEP 2020 & SDGs in Schools through Digital Creativity",
-    formLink: "https://forms.gle/RsZTh5oU9bHeaTBu7",
+    formLink: "https://forms.gle/HiKJLMMWe6LLdsEK8",
     introVideo: {
       youtubeId: "JKcnwdffjrM",
       title: "Session Intro — NEP 2020 & SDGs in Practice",
@@ -216,8 +216,8 @@ To support classroom implementation, tutorial videos and remixable Adobe Express
     series: 2,
     session: 1,
     title: "CPD Series 2 - Session 1 — Leveraging Creative Thinking and AI Enabled Pedagogies to Enhance Classroom Learning Outcomes",
-    topic: "Leveraging Creative Thinking and AI Enabled Pedagogies to Enhance Classroom Learning Outcomes",
-    formLink: "https://forms.gle/K5tvi1K7LYAYJjgMA",
+    topic: "Designing Classroom Learning Materials & Visual Presentations using Adobe Express",
+    formLink: "https://forms.gle/HiKJLMMWe6LLdsEK8",
     pptLink: "https://docs.google.com/presentation/d/1puBxFGkgAgRSjXmn_q-o-1U5zY2PuYYX/edit?slide=id.p1#slide=id.p1",
     pptTitle: "Session 1 Presentation Slides — Creative Thinking & AI Pedagogies (PPT)",
     description:
@@ -469,8 +469,8 @@ Learning Journal`,
     series: 1,
     session: 2,
     title: "CPD Series 1 - Session 2 — Classroom Planning & Organization Skills",
-    topic: "Classroom Planning & Organization Skills",
-    formLink: "https://forms.gle/P2A7SJwhYWLcjsJ48",
+    topic: "Structured Planning Tools for Teachers (Lesson Plan, Class Calendar, etc.)",
+    formLink: "https://forms.gle/HiKJLMMWe6LLdsEK8",
     introVideo: {
       youtubeId: "Zt6kle6Q5ms",
       title: "Session Intro — Classroom Planning & Organization Skills",
@@ -683,6 +683,7 @@ To support implementation, step-by-step tutorial videos and remixable templates 
     session: 2,
     title: "CPD Series 2 - Session 2 — Socio-Emotional Learning 2.0: Deepening Impact with Digital Creativity & AI",
     topic: "Socio-Emotional Learning 2.0: Deepening Impact with Digital Creativity & AI",
+    formLink: "https://forms.gle/HiKJLMMWe6LLdsEK8",
     introVideo: {
       youtubeId: "2iUApCAgrvg",
       title: "Session Intro — Socio-Emotional Learning 2.0",
@@ -887,7 +888,7 @@ To support implementation, step-by-step tutorial videos and remixable templates 
     session: 3,
     title: "CPD Series 1 - Session 3 — Building SocioEmotional Learning (SEL) Skills in the Classroom",
     topic: "Building SocioEmotional Learning (SEL) Skills in the Classroom",
-    formLink: "https://forms.gle/VmP6cCHnyGp1MyxX6",
+    formLink: "https://forms.gle/HiKJLMMWe6LLdsEK8",
     introVideo: {
       youtubeId: "QgE6dME7IQU",
       title: "Session Intro — Building SocioEmotional Learning (SEL) Skills",
@@ -1007,7 +1008,7 @@ To support implementation, step-by-step tutorial videos and suggestive templates
     session: 4,
     title: "CPD Series 1 - Session 4 — Designing CompetencyBased Assessments & Meaningful Assignments",
     topic: "Designing CompetencyBased Assessments & Meaningful Assignments",
-    formLink: "https://forms.gle/aWVR5NjbRAUdNVRj9",
+    formLink: "https://forms.gle/HiKJLMMWe6LLdsEK8",
     description: "This session explores designing competency-based assessments and meaningful assignments using Adobe Express to measure student growth, critical thinking, and digital creativity.",
     objectives: [
       "Learn practical frameworks for designing competency-based assessments in the classroom.",
@@ -1030,7 +1031,7 @@ To support implementation, step-by-step tutorial videos and suggestive templates
           {
             title: "Official Session Submission Form",
             type: "Google Form",
-            url: "https://forms.gle/aWVR5NjbRAUdNVRj9",
+            url: "https://forms.gle/HiKJLMMWe6LLdsEK8",
           }
         ]
       }
@@ -1045,7 +1046,7 @@ To support implementation, step-by-step tutorial videos and suggestive templates
     session: 5,
     title: "CPD Series 1 - Session 5 — Subject Integration( Languages, Science, Social Science, mathematics and Arts)",
     topic: "Subject Integration( Languages, Science, Social Science, mathematics and Arts)",
-    formLink: "https://forms.gle/rSBAPriRzvGQr2pU7",
+    formLink: "https://forms.gle/HiKJLMMWe6LLdsEK8",
     description: "This session focuses on integrating digital creativity across core academic subjects including Languages, Science, Social Science, Mathematics, and Fine Arts using Adobe Express.",
     objectives: [
       "Discover cross-curricular strategies for integrating Adobe Express into daily subject lesson plans.",
@@ -1068,7 +1069,7 @@ To support implementation, step-by-step tutorial videos and suggestive templates
           {
             title: "Official Session Submission Form",
             type: "Google Form",
-            url: "https://forms.gle/rSBAPriRzvGQr2pU7",
+            url: "https://forms.gle/HiKJLMMWe6LLdsEK8",
           }
         ]
       }
@@ -1083,7 +1084,7 @@ To support implementation, step-by-step tutorial videos and suggestive templates
     session: 3,
     title: "CPD Series 2 - Session 3 — AI Foundations for Teachers — Responsible and Creative Use of Generative AI with Adobe Express",
     topic: "AI Foundations for Teachers — Responsible and Creative Use of Generative AI with Adobe Express",
-    formLink: "https://forms.gle/FSsWjHX87VkrSdMV8",
+    formLink: "https://forms.gle/HiKJLMMWe6LLdsEK8",
     description: "This session introduces educators to responsible, ethical, and creative applications of Generative AI in education using Adobe Express Firefly features.",
     objectives: [
       "Understand core AI concepts, ethical guidelines, and safe usage of AI in K-12 education.",
@@ -1106,7 +1107,7 @@ To support implementation, step-by-step tutorial videos and suggestive templates
           {
             title: "Official Session Submission Form",
             type: "Google Form",
-            url: "https://forms.gle/FSsWjHX87VkrSdMV8",
+            url: "https://forms.gle/HiKJLMMWe6LLdsEK8",
           }
         ]
       }
@@ -1121,7 +1122,7 @@ To support implementation, step-by-step tutorial videos and suggestive templates
     session: 4,
     title: "CPD Series 2 - Session 4 — Creating Real-World Learning Experiences through Creative Projects",
     topic: "Creating Real-World Learning Experiences through Creative Projects",
-    formLink: "https://forms.gle/G8sQaQx1sMBz9TbS9",
+    formLink: "https://forms.gle/HiKJLMMWe6LLdsEK8",
     description: "This session guides teachers in building real-world, project-based learning experiences that foster problem-solving, collaboration, and authentic student output.",
     objectives: [
       "Design real-world project prompts that connect classroom learning to community & global issues.",
@@ -1144,7 +1145,7 @@ To support implementation, step-by-step tutorial videos and suggestive templates
           {
             title: "Official Session Submission Form",
             type: "Google Form",
-            url: "https://forms.gle/G8sQaQx1sMBz9TbS9",
+            url: "https://forms.gle/HiKJLMMWe6LLdsEK8",
           }
         ]
       }
