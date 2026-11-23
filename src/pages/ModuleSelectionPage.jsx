@@ -2,6 +2,7 @@ import { useState } from "react";
 import { modules } from "../data/modules";
 import PromoVideoModal from "../components/PromoVideoModal";
 import PptPreviewModal from "../components/PptPreviewModal";
+import { trackEvent } from "../analytics";
 
 export default function ModuleSelectionPage({
   onNavigate,
@@ -33,9 +34,11 @@ export default function ModuleSelectionPage({
 
   const handleModuleClick = (mod) => {
     setSelectedModule(mod);
+    trackEvent("open_module", { series: mod.series, session: mod.session, module_id: mod.id });
   };
 
   const handleEnterSession = () => {
+    trackEvent("enter_session", { module_id: selectedModule.id });
     onNavigate("session", { moduleId: selectedModule.id });
   };
 
@@ -166,6 +169,7 @@ export default function ModuleSelectionPage({
                             className="btn btn-primary btn-sm mobile-start-btn"
                             onClick={(e) => {
                               e.stopPropagation();
+                              trackEvent("enter_session", { module_id: mod.id });
                               onNavigate("session", { moduleId: mod.id });
                             }}
                           >
@@ -402,7 +406,7 @@ export default function ModuleSelectionPage({
                       </div>
 
                       <button
-                        onClick={() => setActivePptModal({ title: selectedModule.pptTitle || "Session Presentation Slides (PPT)", link: selectedModule.pptLink })}
+                        onClick={() => { trackEvent("open_ppt_preview", { module_id: selectedModule.id }); setActivePptModal({ title: selectedModule.pptTitle || "Session Presentation Slides (PPT)", link: selectedModule.pptLink }); }}
                         className="btn btn-primary btn-sm"
                         style={{
                           display: "flex",
@@ -685,7 +689,7 @@ export default function ModuleSelectionPage({
                     <div>
                       <button
                         className="btn btn-primary btn-sm"
-                        onClick={() => setActivePptModal({ title: selectedModule.pptTitle || "Session Presentation Slides (PPT)", link: selectedModule.pptLink })}
+                        onClick={() => { trackEvent("open_ppt_preview", { module_id: selectedModule.id }); setActivePptModal({ title: selectedModule.pptTitle || "Session Presentation Slides (PPT)", link: selectedModule.pptLink }); }}
                         style={{
                           display: "inline-flex",
                           alignItems: "center",

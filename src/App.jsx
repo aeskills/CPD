@@ -6,6 +6,7 @@ import LandingPage from "./pages/LandingPage";
 import ModuleSelectionPage from "./pages/ModuleSelectionPage";
 import SessionPage from "./pages/SessionPage";
 import { getStateFromPath } from "./utils/stateConfig";
+import { trackPageView, trackStateSelected } from "./analytics";
 
 export default function App() {
   const [currentState, setCurrentState] = useState(() => getStateFromPath());
@@ -36,6 +37,12 @@ export default function App() {
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
+
+  // Analytics: virtual page views + state selection (de-duplicated in analytics.js)
+  useEffect(() => {
+    trackStateSelected(currentState);
+    trackPageView(page, page === "session" ? pageData.moduleId || 1 : undefined, currentState);
+  }, [page, pageData.moduleId, currentState]);
 
   const navigate = useCallback((target, data = {}) => {
     setTransitioning(true);

@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect } from "react";
 import { modules } from "../data/modules";
 import VideoPlayer from "../components/VideoPlayer";
 import Sidebar from "../components/Sidebar";
+import { trackEvent, trackEventOnce } from "../analytics";
 
 export default function SessionPage({
   moduleId,
@@ -36,6 +37,7 @@ export default function SessionPage({
   useEffect(() => {
     if (isAllComplete && isAllComplete() && !completeToastShown) {
       setCompleteToastShown(true);
+      trackEventOnce("all_sessions_complete", "all_sessions_complete");
       setTimeout(() => {
         addToast(
           "🎉 Congratulations! You have completed all CPD Series & Sessions!",
@@ -53,23 +55,27 @@ export default function SessionPage({
       // Milestone notifications
       const prevPct = progress.videoProgress[currentVideo.id] || 0;
       if (prevPct < 50 && percentage >= 50) {
+        trackEventOnce(`vp50:${currentVideo.id}`, "video_progress", { milestone: "50", video_title: currentVideo.title, module_id: module.id });
         addToast("50% of this video watched!", "info");
       }
       if (prevPct < 95 && percentage >= 95) {
+        trackEventOnce(`vp95:${currentVideo.id}`, "video_progress", { milestone: "95", video_title: currentVideo.title, module_id: module.id });
         addToast(`Video "${currentVideo.title}" completed! ✅`, "success");
       }
     },
-    [currentVideo, updateVideoProgress, progress.videoProgress, addToast]
+    [currentVideo, updateVideoProgress, progress.videoProgress, addToast, module.id]
   );
 
   const handleVideoEnd = useCallback(() => {
     if (!currentVideo) return;
+    trackEventOnce(`vpc:${currentVideo.id}`, "video_progress", { milestone: "complete", video_title: currentVideo.title, module_id: module.id });
     updateVideoProgress(currentVideo.id, 100);
     addToast(`Video "${currentVideo.title}" completed! ✅`, "success");
-  }, [currentVideo, updateVideoProgress, addToast]);
+  }, [currentVideo, updateVideoProgress, addToast, module.id]);
 
   const handleSelectVideo = (video) => {
     if (video.comingSoon) return;
+    trackEvent("select_video", { video_title: video.title, module_id: module.id });
     setCurrentVideo(video);
     setMobileSidebar(false);
   };
